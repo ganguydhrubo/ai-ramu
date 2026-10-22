@@ -48,6 +48,12 @@ const ENTRY_WRAPPER_PAIRS = [
   { wrapperBasename: "openclaw.mjs", entryBasename: "entry.js" },
   { wrapperBasename: "openclaw.mjs", entryBasename: "entry.mjs" },
   { wrapperBasename: "openclaw.js", entryBasename: "entry.js" },
+  { wrapperBasename: "ramu.mjs", entryBasename: "entry.js" },
+  { wrapperBasename: "ramu.mjs", entryBasename: "entry.mjs" },
+  { wrapperBasename: "ramu.js", entryBasename: "entry.js" },
+  { wrapperBasename: "ai-ramu.mjs", entryBasename: "entry.js" },
+  { wrapperBasename: "ai-ramu.mjs", entryBasename: "entry.mjs" },
+  { wrapperBasename: "ai-ramu.js", entryBasename: "entry.js" },
 ] as const;
 
 async function writeCapturedCliArgumentError(message: string): Promise<void> {
