@@ -1,22 +1,13 @@
 # AI RAMU 🇮🇳 — Bolo Ramu, Kaam Shuru.
 
 <p align="center">
-  <img src="src/server/static/assets/logo.svg" alt="AI RAMU Logo" width="460">
-</p>
-
-<p align="center">
   <strong>Your Indian AI Worker. Ready to Get Things Done.</strong><br>
-  <em>Personal AI Worker, Desktop Agent and Automation Platform.</em>
+  <em>Personal AI Worker, Desktop Agent, and Multi-Channel Automation Platform.</em>
 </p>
 
 <p align="center">
-  <a href="#features">Features</a> •
-  <a href="#quick-start">Quick Start</a> •
-  <a href="#trilingual-engine">Languages</a> •
-  <a href="#architecture">Architecture</a> •
-  <a href="#security--safe-autonomy">Security</a> •
-  <a href="#documentation">Docs</a> •
-  <a href="#license">License</a>
+  <a href="https://github.com/ganguydhrubo/ai-ramu/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/ganguydhrubo/ai-ramu/ci.yml?branch=main&style=flat-square&label=ci" alt="CI status"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green?style=flat-square" alt="License: MIT"></a>
 </p>
 
 ---
@@ -30,141 +21,77 @@
           Bolo Ramu, Kaam Shuru.
 ```
 
-**AI RAMU** is an approachable, powerful personal AI worker and desktop automation agent tailored for India and global users. Unlike simple conversational chatbots, Ramu executes real digital work: generating tax-compliant GST invoices in ₹ INR, organizing local files, parsing CSV spreadsheets, synthesizing briefings, and orchestrating multi-channel interactions across WhatsApp, Telegram, and Google Workspace.
+**AI RAMU** is an autonomous personal AI worker and desktop automation assistant tailored for India and global users. It runs on your own hardware, operates your computer, and meets you wherever you communicate: **WhatsApp**, **Telegram**, **Discord**, **Slack**, **iMessage**, plus a rich local web Control Center and terminal UI.
 
 ---
 
-## 🌟 Highlights
+## 🌟 Capabilities
 
-- **Bilingual & Trilingual Fluency**: Built from day one for **English**, **Hindi (हिन्दी)**, and **Bengali (বাংলা)**.
-- **Real Task Execution**: Executes deterministic desktop automations, sandboxed file operations, and structured document transformations.
-- **Multi-Provider AI Harness**: Plug-and-play with **Google Gemini**, **OpenAI (GPT-4o)**, **Anthropic Claude**, **Groq**, and **Local Ollama** (offline mode).
-- **Human-in-the-Loop Safeguards**: Mandatory approval checkpoints for destructive file or network operations.
-- **Strict Sandbox Boundaries**: Enforced filesystem jail with automatic path traversal protection.
-- **Zero-Secret Leakage**: Automatic real-time regex sanitization of credentials, API tokens, and passwords in all logs.
-- **Commercial-Ready Foundation**: Clean dual-distribution architecture with comprehensive legal compliance and attribution.
+- **Direct WhatsApp Web Pairing**: Scan an ASCII QR code directly in your terminal using WhatsApp Mobile (Linked Devices) to command your agent from anywhere.
+- **Multilingual Persona**: Fluent in English, Hindi (हिन्दी), and Bengali (বাংলা).
+- **Desktop & Computer Control**: Automate file operations, execute approved shell commands, manage browser tasks, and create structured documents.
+- **Multi-Provider AI Harness**: Connects to Google Gemini, OpenAI (GPT-4o), Anthropic Claude, Groq, or local offline Ollama models.
+- **Privacy & Sovereignty**: All credentials, local state, memory files, and conversation history live on your own machine.
+- **Safety First**: Human-in-the-loop checkpoints, filesystem sandboxing, and sensitive credential log redaction.
 
 ---
 
-## ⚡ Quick Start
+## ⚡ Quick Start & Installation
 
-### 1. Prerequisites
-- **Node.js**: `v20.0.0` or later (Node 24 recommended).
-- **Git**
-
-### 2. Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/ganguydhrubo/ai-ramu.git
-cd ai-ramu
-
-# Install dependencies and build
-npm install
-npm run build
+### 1. Global CLI Installation
+```powershell
+# In Windows PowerShell:
+npm install -g openclaw@latest --allow-scripts=openclaw
 ```
 
-### 3. Start the Control Dashboard
-
+### 2. Run the Interactive Onboarding Wizard
+Launch the guided setup wizard in your terminal:
 ```bash
-npm run gateway
+openclaw onboard
 ```
-
-Open your browser at **[http://127.0.0.1:8080](http://127.0.0.1:8080)** to access the AI RAMU Control Center!
-
-### 4. Direct CLI Commands
-
-```bash
-# Ask a question or run a task in English
-node dist/index.js chat "Generate a GST invoice for Sharma Enterprises"
-
-# Command Ramu in Hindi
-node dist/index.js chat "नमस्ते रामू, मेरे फाइलों को व्यवस्थित करो।"
-
-# Command Ramu in Bengali
-node dist/index.js chat "নমস্কার রামু, আমার নতুন কাজের সারাংশ দাও।"
-```
+* Grant system file access permissions
+* Choose your AI model provider (OpenAI, Gemini, Claude, MiniMax, Groq, Ollama)
+* Enter your API key
+* Select your preferred communication channels (WhatsApp, Telegram, etc.)
+* Choose your persona identity
 
 ---
 
-## 🇮🇳 Trilingual Engine
-
-AI Ramu natively understands Indian scripts and cultural context:
-
-| Language | Motto / Tagline | Sample Instruction |
-| :--- | :--- | :--- |
-| **English** | *Bolo Ramu, Kaam Shuru.* | `"Create a tax invoice for ₹50,000"` |
-| **हिन्दी (Hindi)** | *बोलो रामू, काम शुरू।* | `"शर्मा एंटरप्राइजेज के लिए १८% GST इनवॉइस बनाओ"` |
-| **বাংলা (Bengali)** | *বলুন রামু, কাজ শুরু।* | `"আমার জন্য একটি দৈনিক কাজের ব্রিফিং প্রস্তুত করো"` |
+### 3. Pair with WhatsApp
+To link WhatsApp via QR code directly:
+```bash
+openclaw channels login --channel whatsapp
+```
+1. Open **WhatsApp** on your phone.
+2. Tap **Settings / More Options** > **Linked Devices** > **Link a Device**.
+3. Scan the QR code displayed in your terminal.
+4. Your number is now paired! Message your bot to run automations and control your computer.
 
 ---
 
-## 🛡️ Security & Safe Autonomy
-
-AI RAMU treats desktop execution as a privileged capability:
-- **Sandbox Jail**: All file read/write operations are confined to `./workspace` (or your configured `RAMU_WORKSPACE`). Traversals (`../`) are blocked with `SandboxSecurityError`.
-- **Command Guard**: Dangerous system destructive calls (`rm -rf`, `format`, `shutdown`, piped shell scripts) are proactively intercepted.
-- **Prompt Injection Defense**: External inputs and web scrapes are scanned for prompt override signatures before LLM reasoning.
-- **Secret Redactor**: Automatically replaces sensitive tokens (`sk-...`, `AIzaSy...`, bearer tokens) with `••••••••`.
+### 4. Open the Web Dashboard
+```bash
+openclaw dashboard
+```
+Opens your local Control Center in your browser at `http://127.0.0.1:18789/`.
 
 ---
 
 ## 📁 Repository Structure
 
-```text
-ai-ramu/
-├── src/
-│   ├── index.ts               # CLI Entry point ("ai-ramu")
-│   ├── config.ts              # System configuration & environment
-│   ├── brand.ts               # AI RAMU brand assets & constants
-│   ├── core/
-│   │   ├── agent.ts           # Central AI Ramu Worker Brain
-│   │   ├── memory.ts          # Persistent memory store & privacy controls
-│   │   ├── providers.ts       # Multi-provider LLM adapter (Gemini/OpenAI/Claude/Ollama)
-│   │   └── i18n.ts            # Trilingual engine (English, Hindi, Bengali)
-│   ├── security/
-│   │   ├── sandbox.ts         # Path traversal & workspace containment
-│   │   ├── approval.ts        # Human-in-the-loop checkpoint gates
-│   │   ├── guard.ts           # Command whitelist & prompt injection blocker
-│   │   └── redactor.ts        # Log secret & token masking
-│   ├── automation/
-│   │   ├── engine.ts          # Automation runner & scheduler
-│   │   ├── queue.ts           # Task queue with live logs
-│   │   └── recipes.ts         # Indian business & productivity workflows
-│   ├── connectors/
-│   │   ├── filesystem.ts      # Sandboxed file operations
-│   │   ├── browser.ts         # Web scraping & browsing hook
-│   │   ├── whatsapp.ts        # WhatsApp local gateway adapter
-│   │   ├── telegram.ts        # Telegram bot connector
-│   │   └── google.ts          # Google Workspace OAuth connector
-│   └── server/
-│       ├── gateway.ts         # Local HTTP & REST Gateway
-│       └── static/            # AI RAMU Control UI (HTML/CSS/JS/SVG)
-├── test/                      # End-to-end automated test suite (100% pass)
-├── docs/                      # Architecture, User Guide, Troubleshooting, Policies
-├── LEGAL_COMPLIANCE.md        # Licensing audit & compliance report
-├── THIRD_PARTY_NOTICES.md     # Upstream copyright attribution
-├── SECURITY.md                # Security disclosure policy
-├── CHANGELOG.md               # Version history
-└── LICENSE                    # MIT License
-```
-
----
-
-## 📖 Documentation
-
-- [System Architecture](docs/ARCHITECTURE.md)
-- [User Guide](docs/USER_GUIDE.md)
-- [Troubleshooting & Diagnostics](docs/TROUBLESHOOTING.md)
-- [Commercial Roadmap & Editions](docs/COMMERCIAL_ROADMAP.md)
-- [Privacy Policy](docs/PRIVACY_POLICY.md)
-- [Terms of Service](docs/TERMS_OF_SERVICE.md)
-- [Legal Compliance Report](LEGAL_COMPLIANCE.md)
+* `openclaw.mjs` / `ramu.mjs`: CLI Entry points
+* `extensions/whatsapp`: Official WhatsApp Web connector (powered by Baileys)
+* `extensions/telegram`: Official Telegram bot connector
+* `extensions/browser`: Dedicated headless/headful browser automation
+* `extensions/google`: Google Workspace integration
+* `src/wizard`: Interactive terminal onboarding wizard
+* `LEGAL_COMPLIANCE.md`: Licensing and compliance report
+* `THIRD_PARTY_NOTICES.md`: Full open-source attribution
 
 ---
 
 ## ⚖️ License & Attribution
 
-AI RAMU is licensed under the [MIT License](LICENSE) © 2026 ganguydhrubo & AI Ramu Contributors.
+AI RAMU is distributed under the [MIT License](LICENSE) © 2026 ganguydhrubo & AI Ramu Contributors.
 
-Portions of the underlying architecture adapt open concepts from upstream projects including [OpenClaw](https://github.com/openclaw/openclaw) (© 2026 OpenClaw Foundation), Pi (© 2025 Mario Zechner), and Hermes Agent (© 2025 Nous Research). See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for full notices.
+This product adapts and builds upon the open-source [OpenClaw](https://github.com/openclaw/openclaw) project (© 2026 OpenClaw Foundation and Peter Steinberger) and incorporates open-source components including Baileys, SQLite, Pi, and Hermes Agent. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for full notices and details.
