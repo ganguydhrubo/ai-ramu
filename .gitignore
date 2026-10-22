@@ -1,0 +1,28 @@
+# Environment & Secrets
+.env
+.env.local
+*.pem
+*.key
+*.token
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build artifacts
+dist/
+build/
+*.tsbuildinfo
+
+# OS & Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# AI RAMU Local Runtime & Cache
+.ramu/
+logs/
+*.log

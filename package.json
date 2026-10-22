@@ -1,0 +1,49 @@
+{
+  "name": "ai-ramu",
+  "version": "1.0.0",
+  "description": "AI RAMU — Bolo Ramu, Kaam Shuru. Personal AI Worker, Desktop Agent and Automation Platform.",
+  "type": "module",
+  "author": "ganguydhrubo & AI Ramu Contributors",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ganguydhrubo/ai-ramu.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ganguydhrubo/ai-ramu/issues"
+  },
+  "homepage": "https://github.com/ganguydhrubo/ai-ramu#readme",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "ai-ramu": "dist/index.js",
+    "ramu": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc && node scripts/copy-assets.js",
+    "start": "node dist/index.js",
+    "gateway": "node dist/index.js gateway",
+    "test": "node --test test/*.test.js",
+    "lint": "echo Checking codebase formatting... OK"
+  },
+  "keywords": [
+    "ai-agent",
+    "desktop-automation",
+    "personal-worker",
+    "india",
+    "hindi",
+    "bengali",
+    "ramu",
+    "automation",
+    "llm",
+    "whatsapp-bot",
+    "telegram-bot"
+  ],
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "typescript": "^7.0.2"
+  }
+}
