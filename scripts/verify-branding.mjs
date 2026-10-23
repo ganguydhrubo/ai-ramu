@@ -6,6 +6,7 @@
 //   node scripts/verify-branding.mjs [--all-commands] [--gateway http://127.0.0.1:PORT] [--json out.json]
 import { spawnSync } from "node:child_process";
 import { readFileSync, writeFileSync } from "node:fs";
+import http from "node:http";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import zlib from "node:zlib";
@@ -49,12 +50,24 @@ function parseCommands(help) {
   return commands;
 }
 
-async function fetchText(url, headers = {}) {
-  const res = await fetch(url, { headers, signal: AbortSignal.timeout(90_000) });
-  const buf = Buffer.from(await res.arrayBuffer());
-  const encoding = res.headers.get("content-encoding");
-  const body = encoding === "br" ? zlib.brotliDecompressSync(buf) : encoding === "gzip" ? zlib.gunzipSync(buf) : buf;
-  return { status: res.status, text: body.toString("utf8"), encoding, buf: body };
+// node:http rather than fetch: fetch decodes Content-Encoding itself, which would
+// hide whether the precompressed .br/.gz files on disk match their sources.
+function fetchText(url, headers = {}) {
+  return new Promise((resolve, reject) => {
+    const req = http.get(new URL(url), { headers: { "Accept-Encoding": "identity", ...headers }, timeout: 90_000 }, (res) => {
+      const chunks = [];
+      res.on("data", (chunk) => chunks.push(chunk));
+      res.on("end", () => {
+        const raw = Buffer.concat(chunks);
+        const encoding = res.headers["content-encoding"];
+        const body = encoding === "br" ? zlib.brotliDecompressSync(raw) : encoding === "gzip" ? zlib.gunzipSync(raw) : raw;
+        resolve({ status: res.statusCode, text: body.toString("utf8"), encoding, buf: body });
+      });
+      res.on("error", reject);
+    });
+    req.on("timeout", () => req.destroy(new Error("timeout")));
+    req.on("error", reject);
+  });
 }
 
 async function verifyDashboard(base, checks) {

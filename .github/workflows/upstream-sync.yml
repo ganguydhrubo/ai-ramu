@@ -34,6 +34,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "24.x"
+          check-latest: true
       - id: check
         run: node scripts/upstream.mjs check
       - id: pick
@@ -53,6 +54,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "24.x"
+          check-latest: true
       - name: Install candidate engine (postinstall applies branding)
         run: npm install openclaw@${{ needs.check.outputs.version }} --save-exact --no-audit --no-fund
       - name: Unit and branding regression tests
@@ -81,6 +83,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "24.x"
+          check-latest: true
       - name: Pin engine and record status
         run: node scripts/upstream.mjs update --version ${{ needs.check.outputs.version }} --skip-smoke --force
       - name: Commit and fast-forward main
