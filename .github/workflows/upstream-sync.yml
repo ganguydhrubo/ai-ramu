@@ -1,0 +1,41 @@
+name: Automated Upstream Sync & Rebrand
+
+on:
+  schedule:
+    # Run daily at 03:00 UTC (08:30 AM IST)
+    - cron: '0 3 * * *'
+  workflow_dispatch:
+    # Allows manual trigger anytime from GitHub UI
+
+jobs:
+  sync:
+    name: Sync Upstream & Apply AI RAMU Branding
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout AI RAMU repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure Git Identity
+        run: |
+          git config user.name "AI RAMU Bot"
+          git config user.email "bot@airamu.in"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Run Upstream Sync & Rebranding Pipeline
+        run: |
+          node scripts/sync-upstream.mjs
+
+      - name: Push Synced & Rebranded Changes
+        run: |
+          git push origin main || echo "No changes to push or branch protected."

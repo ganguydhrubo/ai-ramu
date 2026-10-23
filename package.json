@@ -1738,6 +1738,8 @@
     "start": "node run.mjs --all",
     "all": "node run.mjs --all",
     "run-all": "node run.mjs --all",
+    "website": "node scripts/serve-website.mjs",
+    "sync": "node scripts/sync-upstream.mjs",
     "android:assemble": "node --import ./scripts/tsx.mjs scripts/run-android-gradle.mts :app:assemblePlayDebug :wear:assembleDebug :wear-shared:assembleDebug",
     "android:assemble:third-party": "node --import ./scripts/tsx.mjs scripts/run-android-gradle.mts :app:assembleThirdPartyDebug",
     "android:bundle:release": "bash -lc 'source ./scripts/lib/android-fastlane.sh && cd apps/android && run_android_fastlane android play_store_archive'",

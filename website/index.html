@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI RAMU — Bolo Ramu, Kaam Shuru | India's Autonomous Personal AI Worker</title>
+  <meta name="description" content="AI RAMU is an approachable Indian AI assistant that does real digital work across WhatsApp, desktop automation, documents, and spreadsheets in Hindi, Bengali, and English.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/jpeg" href="assets/ramu-avatar.jpg">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-wrapper">
+      <a href="#" class="brand-logo">
+        <img src="assets/ramu-avatar.jpg" alt="AI RAMU Avatar" class="brand-avatar">
+        <span class="brand-name">AI <span>RAMU</span></span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#features">Capabilities</a></li>
+        <li><a href="#whatsapp">WhatsApp Agent</a></li>
+        <li><a href="#automation">Desktop Automation</a></li>
+        <li><a href="#calculator">ROI Calculator</a></li>
+        <li><a href="#pricing">Plans</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <span class="badge-live">Gateway: Online</span>
+        <a href="#quickstart" class="btn btn-primary">Start Free</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-pill">
+        <span>🇮🇳</span> Built for India, Ready for the World
+      </div>
+
+      <h1 class="hero-title">
+        Bolo Ramu, <span class="gradient-text">Kaam Shuru.</span>
+      </h1>
+
+      <p class="hero-subtitle">
+        Your autonomous Indian AI worker. Ramu handles your WhatsApp customer chats, desktop chores, GST invoices, and browser workflows — natively in <strong>English, Hindi, and Bengali</strong>.
+      </p>
+
+      <div class="hero-cta-group">
+        <a href="#quickstart" class="btn btn-primary">
+          <span>🚀</span> Get Started in 60s
+        </a>
+        <div class="hero-terminal-pill copy-trigger" data-copy="npx ai-ramu">
+          <span>$ npx ai-ramu</span>
+          <span class="copy-icon">📋</span>
+        </div>
+      </div>
+
+      <!-- Hero Showcase: 2-Column (Hero Visual & WhatsApp Interactive Demo) -->
+      <div class="hero-showcase">
+        <div class="showcase-visual">
+          <img src="assets/hero-banner.jpg" alt="AI RAMU Futuristic Indian Tech Workstation" class="showcase-banner-img">
+        </div>
+
+        <!-- Live WhatsApp Simulator -->
+        <div class="wa-mockup" id="whatsapp">
+          <div class="wa-header">
+            <img src="assets/ramu-avatar.jpg" alt="Ramu WhatsApp Avatar" class="wa-avatar">
+            <div class="wa-info">
+              <h4>AI Ramu (Assistant) 🇮🇳</h4>
+              <span>Online • Autonomous Worker</span>
+            </div>
+          </div>
+
+          <div class="lang-pills">
+            <button class="lang-btn active" data-lang="hi">🇮🇳 हिन्दी (Hindi)</button>
+            <button class="lang-btn" data-lang="bn">🇧🇩 বাংলা (Bengali)</button>
+            <button class="lang-btn" data-lang="en">🌐 English</button>
+          </div>
+
+          <div class="wa-body" id="wa-chat-container">
+            <!-- Dynamically populated via script.js -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Pillars / Features Section -->
+  <section class="features-section" id="features">
+    <div class="container">
+      <div class="section-badge">Why AI Ramu?</div>
+      <h2 class="section-title">An AI That Does Real Digital Work, Not Just Chitchat.</h2>
+      <p class="section-subtitle">
+        Unlike generic chatbots that only speak, AI Ramu has hands: it controls your browser, edits spreadsheets, links to WhatsApp, and follows your voice instructions.
+      </p>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon-box">📱</div>
+          <h3>WhatsApp Native</h3>
+          <p>Link Ramu to any WhatsApp number in 10 seconds via terminal QR code. Send voice notes or text from your phone anywhere, anytime.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-box">🇮🇳</div>
+          <h3>Desi Multilingual Brain</h3>
+          <p>Fluently comprehends Hinglish, Banglish, regional business phrases, GST slabs, UPI payment flows, and Indian business etiquette.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-box">💻</div>
+          <h3>Desktop & Browser Autonomy</h3>
+          <p>Fills government portals, extracts GST/tax data, generates Excel models, downloads client invoices, and manages local files safely.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-box">🔒</div>
+          <h3>100% Local & Sovereign</h3>
+          <p>Runs locally on your computer with deterministic security boundaries. Your sensitive business records and API keys never leave your custody.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Deep Dive Automation Showcase -->
+  <section class="deep-dive-section" id="automation">
+    <div class="container">
+      <div class="deep-dive-wrapper">
+        <div class="deep-dive-content">
+          <div class="section-badge">Desktop Superpowers</div>
+          <h2 class="section-title">Turn Hours of Daily Busywork into 5 Seconds.</h2>
+          <p style="color: var(--text-secondary); margin-bottom: 20px;">
+            AI Ramu acts as your dedicated digital clerk. Whether you run an agency, manage a retail business, or freelance across clients, Ramu takes over the repetitive toil.
+          </p>
+
+          <ul class="feature-checklist">
+            <li>
+              <span class="check-bullet">✓</span>
+              <span><strong>Automated Invoicing & Accounting:</strong> Scrapes portals, formats Excel books, and emails GST invoices to clients.</span>
+            </li>
+            <li>
+              <span class="check-bullet">✓</span>
+              <span><strong>WhatsApp Customer Support:</strong> Auto-answers client inquiries, shares catalogs, and takes meeting requests 24/7.</span>
+            </li>
+            <li>
+              <span class="check-bullet">✓</span>
+              <span><strong>Web Research & Competitor Tracking:</strong> Monitors e-commerce pricing, government tenders, and stock updates.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="deep-dive-media">
+          <img src="assets/automation-showcase.jpg" alt="Desktop Automation in Action with AI Ramu" class="deep-dive-image">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Time & Money Savings Calculator -->
+  <section class="calc-section" id="calculator">
+    <div class="container">
+      <div class="calc-box">
+        <div class="calc-slider-wrapper">
+          <div class="section-badge">ROI Calculator</div>
+          <h2>Calculate Your Monthly Savings with Ramu</h2>
+          <p style="color: var(--text-secondary);">See how much productive time and money you reclaim by delegating your digital toil to AI Ramu.</p>
+
+          <div class="slider-container" style="margin-top: 14px;">
+            <label>
+              <span>Repetitive tasks delegated per week:</span>
+              <strong id="taskCountDisplay" class="saffron-text">35</strong>
+            </label>
+            <input type="range" id="taskSlider" min="5" max="150" value="35">
+          </div>
+
+          <div class="slider-container">
+            <label>
+              <span>Your estimated hourly rate:</span>
+              <strong id="rateDisplay" class="saffron-text">₹1,500</strong>
+            </label>
+            <input type="range" id="hourlyRateSlider" min="300" max="10000" step="100" value="1500">
+          </div>
+        </div>
+
+        <div class="calc-result-box">
+          <div style="font-size: 0.9rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Monthly Time Reclaimed</div>
+          <div class="calc-stat" id="hoursSavedDisplay">88 hrs</div>
+          <div style="font-size: 0.9rem; color: var(--emerald-main); font-weight: 600; margin-top: 8px;">Productivity Value: <span id="inrSavedDisplay" style="font-size: 1.35rem; font-weight: 800; color: #FFFFFF;">₹1,32,000</span></div>
+          <a href="#quickstart" class="btn btn-primary" style="margin-top: 24px; width: 100%;">Claim Your Hours Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Transparent India-First Pricing -->
+  <section class="pricing-section" id="pricing">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 50px;">
+        <div class="section-badge">Simple Pricing</div>
+        <h2 class="section-title">Built for Indian Individuals & Growing Businesses</h2>
+        <p class="section-subtitle" style="margin: 0 auto;">No hidden cloud markups. Bring your own model keys or use local models for complete cost control.</p>
+      </div>
+
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <h3>Self-Hosted Community</h3>
+          <p style="color: var(--text-muted);">100% Free & Open-Source under MIT.</p>
+          <div class="price">₹0 <span>/ lifetime</span></div>
+          <ul class="pricing-features">
+            <li>✓ Full Desktop Agent & Automation</li>
+            <li>✓ Unlimited Local Terminal Sessions</li>
+            <li>✓ WhatsApp Personal Device Pairing</li>
+            <li>✓ Ollama, OpenAI, Claude & Gemini API support</li>
+            <li>✓ English, Hindi, Bengali language engine</li>
+          </ul>
+          <a href="#quickstart" class="btn btn-secondary">Deploy Locally</a>
+        </div>
+
+        <div class="pricing-card popular">
+          <div class="popular-badge">MOST POPULAR</div>
+          <h3>AI Ramu Pro Worker</h3>
+          <p style="color: var(--text-muted);">For Freelancers, Solopreneurs & Creators.</p>
+          <div class="price">₹999 <span>/ month</span></div>
+          <ul class="pricing-features">
+            <li>✓ Everything in Community tier</li>
+            <li>✓ 24/7 Managed Cloud Gateway Relay</li>
+            <li>✓ Always-On WhatsApp Business Bot</li>
+            <li>✓ Automated Scheduled Cron Workflows</li>
+            <li>✓ Priority WhatsApp & Email Support</li>
+            <li>✓ Pre-built Indian GST & Invoicing Skills</li>
+          </ul>
+          <a href="#quickstart" class="btn btn-primary">Start 14-Day Free Trial</a>
+        </div>
+
+        <div class="pricing-card">
+          <h3>Business Team Fleet</h3>
+          <p style="color: var(--text-muted);">For Agencies, SMEs & Multi-Agent Operations.</p>
+          <div class="price">₹4,999 <span>/ month</span></div>
+          <ul class="pricing-features">
+            <li>✓ Everything in Pro Worker</li>
+            <li>✓ Multi-Agent Coordinator Architecture</li>
+            <li>✓ Shared Team Workspace & Approvals</li>
+            <li>✓ Unlimited WhatsApp & Telegram Channels</li>
+            <li>✓ Dedicated Indian Solution Architect</li>
+            <li>✓ Custom ERP & Tally Integration</li>
+          </ul>
+          <a href="#quickstart" class="btn btn-secondary">Contact Enterprise</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quickstart 1-Minute Launch -->
+  <section class="quickstart-section" id="quickstart" style="padding: 80px 0; background: var(--bg-secondary);">
+    <div class="container" style="text-align: center; max-width: 820px;">
+      <div class="section-badge">Get Started</div>
+      <h2 class="section-title">One Command. Zero Complications.</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 30px;">
+        Run this single command in your PowerShell or terminal to boot the gateway, open the dashboard, and link your WhatsApp.
+      </p>
+
+      <div class="glass-panel" style="padding: 24px; text-align: left; background: #000000; border-radius: var(--radius-md);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; color: var(--text-muted); font-size: 0.8rem; font-family: monospace;">
+          <span>POWERSHELL / BASH</span>
+          <span style="color: var(--emerald-main);">● Ready to run</span>
+        </div>
+        <pre style="color: var(--text-primary); font-family: 'Fira Code', monospace; font-size: 1.05rem; overflow-x: auto; margin: 0;"><code>git clone https://github.com/ganguydhrubo/ai-ramu.git
+cd ai-ramu
+npm start</code></pre>
+      </div>
+
+      <div style="margin-top: 32px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+        <button class="btn btn-primary copy-trigger" data-copy="git clone https://github.com/ganguydhrubo/ai-ramu.git && cd ai-ramu && npm start">
+          <span>📋</span> Copy Setup Command
+        </button>
+        <a href="https://github.com/ganguydhrubo/ai-ramu" target="_blank" class="btn btn-secondary">
+          <span>⭐</span> Star on GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px; align-items: center;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <img src="assets/ramu-avatar.jpg" alt="AI RAMU" style="width: 36px; height: 36px; border-radius: 50%; border: 1.5px solid var(--saffron-main);">
+          <div>
+            <div style="font-weight: 800; font-family: var(--font-heading); font-size: 1.1rem; color: #FFFFFF;">AI RAMU</div>
+            <div style="font-size: 0.8rem; color: var(--text-muted);">Bolo Ramu, Kaam Shuru.</div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 24px; font-size: 0.9rem;">
+          <a href="https://github.com/ganguydhrubo/ai-ramu" target="_blank" style="color: var(--text-secondary); text-decoration: none;">GitHub</a>
+          <a href="https://github.com/ganguydhrubo/ai-ramu/issues" target="_blank" style="color: var(--text-secondary); text-decoration: none;">Issues</a>
+          <a href="https://github.com/ganguydhrubo/ai-ramu#license" target="_blank" style="color: var(--text-secondary); text-decoration: none;">MIT License</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 AI RAMU. Handcrafted with ❤️ for Indian professionals and businesses.</div>
+        <div>Upstream Engine: OpenClaw Architecture (MIT Licensed).</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
