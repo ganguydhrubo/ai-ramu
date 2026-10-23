@@ -25,6 +25,20 @@ test("known CLI leaks are rebranded", () => {
   assert.equal(ui('<span class="topbar-brand__title">OpenClaw</span>'), '<span class="topbar-brand__title">AI RAMU</span>');
 });
 
+// Found by the end-to-end smoke test on engine 2026.10.6.
+test("pre-rendered help and flag-style hints are rebranded", () => {
+  assert.equal(cli('"browserHelpText": "\\nOpenClaw 2026.10.6 (fe06181) — x"'), '"browserHelpText": "\\nAI RAMU 2026.10.6 (fe06181) — x"');
+  assert.equal(cli("Examples:\\n  openclaw --dev gateway"), "Examples:\\n  ramu --dev gateway");
+  assert.equal(cli("openclaw --update  # Shorthand"), "ramu --update  # Shorthand");
+  assert.equal(cli("\\nopenclaw doctor"), "\\nramu doctor");
+  assert.equal(cli("npm i -g openclaw --allow-scripts"), "npm i -g openclaw --allow-scripts");
+  assert.equal(cli("npm install openclaw --save"), "npm install openclaw --save");
+});
+
+test("verifier treats repo slugs, paths and file names as identifiers", () => {
+  assert.deepEqual(findLeaks("create an openclaw/openclaw issue; /tmp/openclaw/uploads; ./openclaw.patch.json5"), []);
+});
+
 test("technical identifiers are preserved", () => {
   const keep = [
     "npm install -g openclaw@latest",

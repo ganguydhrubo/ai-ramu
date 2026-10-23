@@ -43,7 +43,7 @@ async function runEngine(engineArgs) {
 if (args.length === 0 || (args.length === 1 && LAUNCHER_ALIASES.has(args[0]))) {
   const { launch } = await import("../lib/launcher.mjs");
   process.exitCode = await launch();
-} else if (args[0] === "whatsapp" || args[0] === "qr") {
+} else if (args[0] === "whatsapp") {
   const { pairWhatsApp } = await import("../lib/launcher.mjs");
   process.exitCode = await pairWhatsApp();
 } else if (args[0] === "about") {

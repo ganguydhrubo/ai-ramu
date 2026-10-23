@@ -17,7 +17,7 @@ const esc = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 // Characters that make a match part of an identifier, path, URL, header or key.
 // "# OpenClaw …" and "<string>OpenClaw …" are markers the engine writes into shell
 // profiles and launchd plists and later searches for, so they must not change.
-const IDENT_BEFORE = String.raw`(?<![A-Za-z0-9_$.\-/@#\\^])(?<!# )(?<!<string>)`;
+const IDENT_BEFORE = String.raw`(?:(?<=\\n)|(?<![A-Za-z0-9_$.\-/@#\\^]))(?<!# )(?<!<string>)`;
 const IDENT_AFTER =
   String.raw`(?![A-Za-z0-9_$/@#\\]|-[A-Z0-9]|\.(?:app|exe|json|json5|mjs|cjs|js|ts|plist|log|lnk|cmd|sh|ps1|md)\b| Nerd Symbols)`;
 
@@ -56,10 +56,13 @@ export function parseRootCommands(rootHelpText) {
 // `~/.openclaw`, `@openclaw/whatsapp`, argv arrays and phrases like "openclaw temp
 // dir" are untouched. Anchored regex sources (`/^openclaw …/`) are handled by
 // widenRegexPrefixes instead so they keep matching legacy names.
-const CMD_BEFORE = String.raw`(?<![A-Za-z0-9_$.\-/@#\\:^])`;
+// "\n" escapes inside JSON/JS strings end in "n", so the escaped-newline case is
+// allowed explicitly. Global-flag forms ("openclaw --dev gateway") count as hints,
+// but not after package-manager installs ("npm i -g openclaw --foo").
+const CMD_BEFORE = String.raw`(?:(?<=\\n)|(?<![A-Za-z0-9_$.\-/@#\\:^]))(?<!-g )(?<!install )(?<!add )`;
 export function buildCommandHintPattern(commands = FALLBACK_COMMANDS) {
   const names = [...new Set(commands)].sort((a, b) => b.length - a.length).map(esc).join("|");
-  return new RegExp(`${CMD_BEFORE}${ENGINE.packageName}(?= (?:${names})(?![A-Za-z0-9_-]))`, "g");
+  return new RegExp(`${CMD_BEFORE}${ENGINE.packageName}(?= (?:(?:${names})(?![A-Za-z0-9_-])|--[a-z]))`, "g");
 }
 export const COMMAND_HINT_PATTERN = buildCommandHintPattern();
 
@@ -236,4 +239,7 @@ export const ALLOWED_IDENTIFIERS = [
   /openclaw-[a-z0-9-]+/g, // service, task and plugin ids
   /X-OpenClaw-[A-Za-z-]+/g,
   /npm (?:i|install) -g openclaw\S*/g,
+  /\bopenclaw\/openclaw\b/g, // upstream GitHub repo slug (issue reporting)
+  /[\\/]openclaw(?=[\\/])/g, // filesystem paths such as /tmp/openclaw/…
+  /\bopenclaw(?:\.[a-z0-9-]+)+\b/g, // file names such as openclaw.patch.json5
 ];

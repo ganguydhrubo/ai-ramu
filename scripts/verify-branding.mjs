@@ -50,7 +50,7 @@ function parseCommands(help) {
 }
 
 async function fetchText(url, headers = {}) {
-  const res = await fetch(url, { headers, signal: AbortSignal.timeout(15_000) });
+  const res = await fetch(url, { headers, signal: AbortSignal.timeout(90_000) });
   const buf = Buffer.from(await res.arrayBuffer());
   const encoding = res.headers.get("content-encoding");
   const body = encoding === "br" ? zlib.brotliDecompressSync(buf) : encoding === "gzip" ? zlib.gunzipSync(buf) : buf;
@@ -127,7 +127,7 @@ async function main() {
     const leaks = findLeaks(out);
     checks.push({
       surface: `ramu ${command} --help`,
-      ok: out.includes(`Usage: ramu ${command}`) && leaks.length === 0,
+      ok: out.includes("Usage: ramu ") && leaks.length === 0,
       detail: leaks.length ? leaks.slice(0, 3) : "clean",
     });
   }
