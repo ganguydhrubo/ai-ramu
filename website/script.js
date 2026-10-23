@@ -121,9 +121,9 @@ document.addEventListener("DOMContentLoaded", () => {
   if (shareBtn) {
     shareBtn.addEventListener("click", async () => {
       const shareData = {
-        title: "AI Ramu — Your AI, on WhatsApp",
-        text: "Check out AI Ramu — a free personal AI assistant that works directly inside WhatsApp in Hindi, English and Bengali:",
-        url: "https://ai-ramu.site"
+        title: "AI Ramu — Your Personal AI Worker",
+        text: "Check out AI Ramu — a free personal AI worker you install on your PC and control from WhatsApp in Hindi, English and Bengali:",
+        url: "https://airamu.site"
       };
 
       if (navigator.share && /mobile|android|iphone/i.test(navigator.userAgent)) {
@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (copyBtn) {
     copyBtn.addEventListener("click", async () => {
-      const urlToCopy = "https://ai-ramu.site/";
+      const urlToCopy = "https://airamu.site/";
       try {
         await navigator.clipboard.writeText(urlToCopy);
       } catch {
