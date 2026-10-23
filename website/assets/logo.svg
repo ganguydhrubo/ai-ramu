@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 256" role="img" aria-label="AI RAMU">
+  <title>AI RAMU</title>
+  <defs>
+    <linearGradient id="ramu-logo-bg" x1="24" y1="16" x2="232" y2="240" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FF9A1F"/>
+      <stop offset="0.55" stop-color="#F43F5E"/>
+      <stop offset="1" stop-color="#9333EA"/>
+    </linearGradient>
+    <linearGradient id="ramu-logo-ai" x1="300" y1="60" x2="470" y2="200" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FF8A00"/>
+      <stop offset="1" stop-color="#E11D74"/>
+    </linearGradient>
+  </defs>
+  <rect width="256" height="256" rx="58" fill="url(#ramu-logo-bg)"/>
+  <path d="M82 192V68h46a34 34 0 0 1 0 68H82M123 136l43 56" fill="none" stroke="#FFFFFF" stroke-width="23" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M196 46c2.5 15 6.5 19 21.5 21.5-15 2.5-19 6.5-21.5 21.5-2.5-15-6.5-19-21.5-21.5 15-2.5 19-6.5 21.5-21.5z" fill="#FFFFFF"/>
+  <text x="300" y="176" font-family="'Bricolage Grotesque','Segoe UI',system-ui,sans-serif" font-size="150" font-weight="800" letter-spacing="-4">
+    <tspan fill="url(#ramu-logo-ai)">AI</tspan><tspan fill="#16142B" dx="34">RAMU</tspan>
+  </text>
+</svg>

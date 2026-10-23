@@ -1,41 +1,123 @@
-name: Automated Upstream Sync & Rebrand
+name: Upstream engine sync
 
+# Checks for a new stable engine release twice a day (~08:30 and ~20:30 IST).
+# GitHub may start scheduled runs some minutes late.
 on:
   schedule:
-    # Run daily at 03:00 UTC (08:30 AM IST)
-    - cron: '0 3 * * *'
+    - cron: "0 3 * * *"
+    - cron: "0 15 * * *"
   workflow_dispatch:
-    # Allows manual trigger anytime from GitHub UI
+    inputs:
+      version:
+        description: "Engine version to try (default: latest stable)"
+        required: false
+      force:
+        description: "Re-validate even if already on that version"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: upstream-sync
+  cancel-in-progress: false
 
 jobs:
-  sync:
-    name: Sync Upstream & Apply AI RAMU Branding
+  check:
+    runs-on: ubuntu-latest
+    outputs:
+      update: ${{ steps.check.outputs.update }}
+      version: ${{ steps.pick.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24.x"
+      - id: check
+        run: node scripts/upstream.mjs check
+      - id: pick
+        run: echo "version=${{ inputs.version || steps.check.outputs.version }}" >> "$GITHUB_OUTPUT"
+
+  validate:
+    needs: check
+    if: needs.check.outputs.update == 'true' || inputs.force || inputs.version != ''
+    strategy:
+      fail-fast: true
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24.x"
+      - name: Install candidate engine (postinstall applies branding)
+        run: npm install openclaw@${{ needs.check.outputs.version }} --save-exact --no-audit --no-fund
+      - name: Unit and branding regression tests
+        run: npm test
+      - name: Rebrand rules and integrity check
+        run: node scripts/rebrand-engine.mjs check
+      - name: CLI branding scan (every command)
+        if: runner.os == 'Linux'
+        run: node scripts/verify-branding.mjs --all-commands
+      - name: Gateway + dashboard smoke test
+        run: node scripts/smoke.mjs --timeout 600
+      - name: Dependency security audit (critical blocks release)
+        if: runner.os == 'Linux'
+        run: npm audit --omit=dev --audit-level=critical
+
+  release:
+    needs: [check, validate]
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      pull-requests: write
-
     steps:
-      - name: Checkout AI RAMU repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
+          ref: main
           fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Configure Git Identity
-        run: |
-          git config user.name "AI RAMU Bot"
-          git config user.email "bot@airamu.in"
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 22
-
-      - name: Run Upstream Sync & Rebranding Pipeline
+          node-version: "24.x"
+      - name: Pin engine and record status
+        run: node scripts/upstream.mjs update --version ${{ needs.check.outputs.version }} --skip-smoke --force
+      - name: Commit and fast-forward main
+        env:
+          VERSION: ${{ needs.check.outputs.version }}
         run: |
-          node scripts/sync-upstream.mjs
-
-      - name: Push Synced & Rebranded Changes
+          git config user.name "ai-ramu-sync[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package.json package-lock.json upstream/
+          if git diff --cached --quiet; then echo "Nothing to commit."; exit 0; fi
+          git commit -m "chore(engine): update openclaw engine to ${VERSION}" \
+            -m "Validated on Linux and Windows: unit tests, rebrand check, branding scan, gateway smoke test, npm audit."
+          git push origin "HEAD:refs/heads/sync/openclaw-${VERSION}"
+          # Fails (and retries next run) if main moved meanwhile: never force.
+          git push origin HEAD:main
+      - name: Summary
         run: |
-          git push origin main || echo "No changes to push or branch protected."
+          echo "### Engine updated to ${{ needs.check.outputs.version }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "Rollback: \`npm run rollback\` or revert the sync commit on main." >> "$GITHUB_STEP_SUMMARY"
+
+  held:
+    needs: [check, validate, release]
+    if: always() && (needs.validate.result == 'failure' || needs.release.result == 'failure')
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Open or update a tracking issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ needs.check.outputs.version }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          title="Upstream engine ${VERSION} held: checks failed"
+          body="The scheduled sync did not release engine ${VERSION}. main still runs the last known-good engine. Details: ${RUN_URL}"
+          existing=$(gh issue list -R "$GITHUB_REPOSITORY" --state open --search "\"${title}\" in:title" --json number --jq '.[0].number')
+          if [ -n "$existing" ]; then gh issue comment "$existing" -R "$GITHUB_REPOSITORY" --body "$body"
+          else gh issue create -R "$GITHUB_REPOSITORY" --title "$title" --body "$body"; fi
+      - name: Summary
+        run: echo "### Engine ${{ needs.check.outputs.version }} held — main unchanged" >> "$GITHUB_STEP_SUMMARY"

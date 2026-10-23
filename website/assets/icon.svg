@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="AI RAMU">
+  <title>AI RAMU</title>
+  <defs>
+    <linearGradient id="ramu-bg" x1="48" y1="32" x2="464" y2="480" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FF9A1F"/>
+      <stop offset="0.55" stop-color="#F43F5E"/>
+      <stop offset="1" stop-color="#9333EA"/>
+    </linearGradient>
+    <radialGradient id="ramu-glow" cx="150" cy="96" r="300" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.32"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="116" fill="url(#ramu-bg)"/>
+  <rect width="512" height="512" rx="116" fill="url(#ramu-glow)"/>
+  <!-- R: stem, bowl and a leg that leans forward ("kaam shuru") -->
+  <path d="M164 384V136h92a68 68 0 0 1 0 136h-92M246 272l86 112" fill="none" stroke="#FFFFFF" stroke-width="46" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- spark: the AI that listens when you say "bolo" -->
+  <path d="M392 92c5 30 13 38 43 43-30 5-38 13-43 43-5-30-13-38-43-43 30-5 38-13 43-43z" fill="#FFFFFF"/>
+</svg>
