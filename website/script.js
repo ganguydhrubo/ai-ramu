@@ -1,108 +1,173 @@
-// AI RAMU Interactive Engine
+/**
+ * AI RAMU — Lightweight Interactive Script
+ * WhatsApp Conversation Scenarios, Social Sharing & Fast Interactions
+ */
 
-document.addEventListener('DOMContentLoaded', () => {
-  // 1. Multilingual WhatsApp Conversation Data
-  const conversations = {
-    hi: [
-      { sender: 'user', text: 'रामू, पिछले महीने के सारे जीएसटी इनवॉइस डाउनलोड करके एक एक्सेल शीट बना दो।' },
-      { sender: 'bot', text: 'जी भैया! पोर्टल से 14 इनवॉइस डाउनलोड कर लिए हैं। GST_Sept_Report.xlsx डेस्कटॉप पर सेव कर दी है और सारा टैक्स ब्रेकअप तैयार है। 👍' },
-      { sender: 'user', text: 'बढ़िया! और क्लाइंट शर्मा जी को व्हाट्सएप पर कोटेशन भी भेज दो।' },
-      { sender: 'bot', text: 'शर्मा जी को ₹45,000 का कोटेशन पीडीएफ सहित व्हाट्सएप पर डिलीवर कर दिया गया है। Kaam Done! 🚀' }
+document.addEventListener("DOMContentLoaded", () => {
+  // Scenario Data
+  const scenarios = {
+    daily: [
+      {
+        type: "out",
+        text: "Hey Ramu, draft a polite message to my client explaining that their invoice will be ready by 4 PM today.",
+        time: "10:14 AM"
+      },
+      {
+        type: "in",
+        text: "Namaste! Here is a clean, polite draft for your client:\n\n\"Dear Sharmaji, thank you for your patience. Your project invoice is being prepared and will be shared with you by 4:00 PM today. Please let me know if you need any specific PO details added. Regards.\"\n\nShall I send this or adjust the tone?",
+        time: "10:14 AM"
+      }
     ],
-    bn: [
-      { sender: 'user', text: 'রামু, গত সপ্তাহের সব কাস্টমার অর্ডারের সামারি বানিয়ে এক্সেল ফাইলে রেডি করো।' },
-      { sender: 'bot', text: 'হাঁ দাদা! মোট ১৮টি অর্ডার প্রসেস করা হয়েছে। Customer_Orders_Weekly.xlsx রেডি করে আপনার ফোল্ডারে রেখে দিয়েছি। 📊' },
-      { sender: 'user', text: 'দুর্দান্ত! এবার আজকের ক্লায়েন্ট মিটিংয়ের জন্য গুগল মিট লিঙ্কটা পাঠিয়ে দাও।' },
-      { sender: 'bot', text: 'মিটিং শিডিউলড! ক্লায়েন্ট ও আপনার ক্যালেন্ডারে লিঙ্ক অ্যাড করে হোয়াটসঅ্যাপে পাঠিয়ে দিয়েছি। কাজ শেষ! 🇮🇳' }
+    hindi: [
+      {
+        type: "out",
+        text: "Ramu, kal subah 10 baje CA ke saath meeting hai, reminder set kar do aur GST summary ready rakhna.",
+        time: "02:30 PM"
+      },
+      {
+        type: "in",
+        text: "Haan bilkul! ⏰ Kal subah **10:00 AM** ke liye reminder set ho gaya hai.\n\nMaine aapke pichhle mahine ki GST summary bhi ready kar di hai. Meeting shuru hone se 15 minute pehle aapko WhatsApp pe alert bhej dunga!",
+        time: "02:30 PM"
+      }
     ],
-    en: [
-      { sender: 'user', text: 'Ramu, scrape the competitor pricing for cloud servers and alert me on Slack.' },
-      { sender: 'bot', text: 'On it! 8 competitor plans scraped across AWS, Azure & Hetzner. Price drop detected on Hetzner AX52. Detailed report sent! 📈' },
-      { sender: 'user', text: 'Awesome. Now draft payment follow-ups for all overdue invoices.' },
-      { sender: 'bot', text: 'Follow-up messages customized with invoice numbers sent to 4 clients via WhatsApp and Gmail. Bolo Ramu, Kaam Shuru!' }
+    bengali: [
+      {
+        type: "out",
+        text: "রামু, আজকের গুরুত্বপূর্ণ কাজের লিস্টটা একটু দেখে বলো তো?",
+        time: "11:05 AM"
+      },
+      {
+        type: "in",
+        text: "নমস্কার! আজকের জন্য আপনার ৩টি প্রধান কাজ রয়েছে:\n\n1. সকাল ১১:৩০ — ক্লায়েন্টের প্রজেক্ট আপডেট\n2. দুপুর ২:০০ — নতুন ইনভয়েস জেনারেট করা\n3. সন্ধ্যে ৬:০০ — সাপ্তাহিক টিম কল\n\nসবকিছু প্রস্তুত আছে, কোনো সাহায্য লাগলে বলবেন!",
+        time: "11:05 AM"
+      }
+    ],
+    research: [
+      {
+        type: "out",
+        text: "What is the standard GST rate for IT consulting services in India and how does RCM apply?",
+        time: "04:12 PM"
+      },
+      {
+        type: "in",
+        text: "In India, IT & technical consulting services are taxed at **18% GST** (SAC code 998313).\n\n• Intra-state: 9% CGST + 9% SGST\n• Inter-state: 18% IGST\n\nReverse Charge Mechanism (RCM) generally does not apply if you are a registered entity, unless services are imported from an overseas supplier.",
+        time: "04:12 PM"
+      }
     ]
   };
 
-  const waContainer = document.getElementById('wa-chat-container');
-  const langBtns = document.querySelectorAll('.lang-btn');
+  const chatContainer = document.getElementById("chat-stream");
+  const scenarioButtons = document.querySelectorAll(".scenario-btn");
 
-  function renderConversation(lang) {
-    if (!waContainer) return;
-    waContainer.innerHTML = '';
-    const messages = conversations[lang] || conversations.hi;
-    const now = new Date();
-    const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  // Render chat messages with realistic WhatsApp bubbles
+  function renderScenario(key) {
+    const list = scenarios[key] || scenarios.daily;
+    chatContainer.innerHTML = "";
 
-    messages.forEach((msg, idx) => {
-      setTimeout(() => {
-        const bubble = document.createElement('div');
-        bubble.className = `wa-bubble ${msg.sender === 'user' ? 'wa-user' : 'wa-bot'}`;
-        bubble.innerHTML = `
-          <div>${msg.text}</div>
-          <span class="time">${timeStr}</span>
-        `;
-        waContainer.appendChild(bubble);
-        waContainer.scrollTop = waContainer.scrollHeight;
-      }, idx * 450);
+    // Add Date Pill
+    const datePill = document.createElement("div");
+    datePill.className = "wa-date-pill";
+    datePill.textContent = "TODAY";
+    chatContainer.appendChild(datePill);
+
+    list.forEach((msg) => {
+      const bubble = document.createElement("div");
+      bubble.className = `wa-bubble ${msg.type === "out" ? "wa-bubble-out" : "wa-bubble-in"}`;
+
+      const textParagraph = document.createElement("p");
+      textParagraph.style.whiteSpace = "pre-line";
+      textParagraph.innerHTML = escapeAndFormat(msg.text);
+      bubble.appendChild(textParagraph);
+
+      const meta = document.createElement("div");
+      meta.className = "wa-msg-meta";
+      meta.innerHTML = `<span>${msg.time}</span>${msg.type === "out" ? '<span class="wa-ticks">✓✓</span>' : ""}`;
+      bubble.appendChild(meta);
+
+      chatContainer.appendChild(bubble);
     });
+
+    // Auto-scroll to bottom of chat
+    chatContainer.scrollTop = chatContainer.scrollHeight;
   }
 
-  langBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      langBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const lang = btn.dataset.lang;
-      renderConversation(lang);
-    });
-  });
-
-  // Initial render in Hindi
-  renderConversation('hi');
-
-  // 2. Interactive ROI Calculator
-  const taskSlider = document.getElementById('taskSlider');
-  const hourlyRateSlider = document.getElementById('hourlyRateSlider');
-  const taskCountDisplay = document.getElementById('taskCountDisplay');
-  const rateDisplay = document.getElementById('rateDisplay');
-  const hoursSavedDisplay = document.getElementById('hoursSavedDisplay');
-  const inrSavedDisplay = document.getElementById('inrSavedDisplay');
-
-  function calculateROI() {
-    if (!taskSlider || !hourlyRateSlider) return;
-    const tasksPerWeek = parseInt(taskSlider.value, 10);
-    const hourlyRate = parseInt(hourlyRateSlider.value, 10);
-
-    taskCountDisplay.textContent = tasksPerWeek;
-    rateDisplay.textContent = '₹' + hourlyRate.toLocaleString('en-IN');
-
-    // Each repetitive task takes on average 35 minutes (0.58 hours)
-    const hoursSavedMonthly = Math.round(tasksPerWeek * 0.58 * 4.33);
-    const inrSavedMonthly = hoursSavedMonthly * hourlyRate;
-
-    hoursSavedDisplay.textContent = hoursSavedMonthly + ' hrs';
-    inrSavedDisplay.textContent = '₹' + inrSavedMonthly.toLocaleString('en-IN');
+  function escapeAndFormat(text) {
+    // Basic bold formatting support for **text**
+    return text
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
   }
 
-  if (taskSlider && hourlyRateSlider) {
-    taskSlider.addEventListener('input', calculateROI);
-    hourlyRateSlider.addEventListener('input', calculateROI);
-    calculateROI();
-  }
-
-  // 3. One-Click Copy Command
-  const copyButtons = document.querySelectorAll('.copy-trigger');
-  copyButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const code = btn.dataset.copy || btn.textContent.trim();
-      navigator.clipboard.writeText(code).then(() => {
-        const originalText = btn.innerHTML;
-        btn.innerHTML = '✓ Copied to Clipboard!';
-        btn.style.borderColor = '#10B981';
-        setTimeout(() => {
-          btn.innerHTML = originalText;
-          btn.style.borderColor = '';
-        }, 2000);
+  // Handle Scenario Tab Switching
+  scenarioButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      scenarioButtons.forEach((b) => {
+        b.classList.remove("active");
+        b.setAttribute("aria-selected", "false");
       });
+      btn.classList.add("active");
+      btn.setAttribute("aria-selected", "true");
+      renderScenario(btn.dataset.scenario);
     });
   });
+
+  // Initial render
+  renderScenario("daily");
+
+  // One-Click Native or WhatsApp Sharing
+  const shareBtn = document.getElementById("share-wa-btn");
+  if (shareBtn) {
+    shareBtn.addEventListener("click", async () => {
+      const shareData = {
+        title: "AI Ramu — Your AI, on WhatsApp",
+        text: "Check out AI Ramu — a free personal AI assistant that works directly inside WhatsApp in Hindi, English and Bengali:",
+        url: "https://ai-ramu.site"
+      };
+
+      if (navigator.share && /mobile|android|iphone/i.test(navigator.userAgent)) {
+        try {
+          await navigator.share(shareData);
+          return;
+        } catch {
+          // Fall back to direct WhatsApp link if cancelled/failed
+        }
+      }
+
+      const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareData.text + " " + shareData.url)}`;
+      window.open(waUrl, "_blank", "noopener,noreferrer");
+    });
+  }
+
+  // Copy Link Button with Toast
+  const copyBtn = document.getElementById("copy-url-btn");
+  const toast = document.getElementById("toast");
+  const copyText = document.getElementById("copy-text");
+
+  if (copyBtn) {
+    copyBtn.addEventListener("click", async () => {
+      const urlToCopy = "https://ai-ramu.site/";
+      try {
+        await navigator.clipboard.writeText(urlToCopy);
+      } catch {
+        // Fallback
+        const temp = document.createElement("input");
+        temp.value = urlToCopy;
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand("copy");
+        document.body.removeChild(temp);
+      }
+
+      if (copyText) copyText.textContent = "Copied!";
+      if (toast) {
+        toast.classList.add("show");
+        setTimeout(() => {
+          toast.classList.remove("show");
+          if (copyText) copyText.textContent = "Copy Link";
+        }, 2500);
+      }
+    });
+  }
 });
