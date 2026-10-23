@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { readFileSync, writeFileSync, existsSync } from "node:fs";
+import { readFileSync, writeFileSync, existsSync, readdirSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -112,6 +112,48 @@ for (const file of bannerDistFiles) {
     c = c.replace(/decorativeEmoji\("[^"]*"/g, 'decorativeEmoji("🇮🇳"');
     writeFileSync(p, c);
     console.log(`✓ ${file} banner updated to AI RAMU`);
+  }
+}
+
+// 5. Patch CLI_NAME to ramu across src and dist
+const cliNameSrc = path.join(rootDir, "src", "cli", "cli-name.ts");
+if (existsSync(cliNameSrc)) {
+  let c = readFileSync(cliNameSrc, "utf8");
+  c = c.replace(/CLI_NAME = "openclaw"/g, 'CLI_NAME = "ramu"');
+  writeFileSync(cliNameSrc, c);
+  console.log("✓ src/cli/cli-name.ts updated to CLI_NAME = 'ramu'");
+}
+
+const distDir = path.join(rootDir, "dist");
+if (existsSync(distDir)) {
+  const files = readdirSync(distDir);
+  for (const f of files) {
+    if (f.startsWith("cli-name") && (f.endsWith(".mjs") || f.endsWith(".js"))) {
+      const p = path.join(distDir, f);
+      let c = readFileSync(p, "utf8");
+      c = c.replace(/CLI_NAME = "openclaw"/g, 'CLI_NAME = "ramu"');
+      writeFileSync(p, c);
+      console.log(`✓ dist/${f} updated to CLI_NAME = 'ramu'`);
+    }
+    if (f.startsWith("openclaw-root") && (f.endsWith(".mjs") || f.endsWith(".js"))) {
+      const p = path.join(distDir, f);
+      let c = readFileSync(p, "utf8");
+      c = c.replace(/=== "openclaw"/g, '=== "openclaw" || name === "ai-ramu"');
+      writeFileSync(p, c);
+      console.log(`✓ dist/${f} updated with ai-ramu package root recognition`);
+    }
+  }
+}
+
+// 6. Ensure node_modules/openclaw junction exists for plugin peer dependency resolution
+const nmOpenclaw = path.join(rootDir, "node_modules", "openclaw");
+if (!existsSync(nmOpenclaw)) {
+  try {
+    const { symlinkSync } = await import("node:fs");
+    symlinkSync(rootDir, nmOpenclaw, "junction");
+    console.log("✓ node_modules/openclaw junction created");
+  } catch (e) {
+    console.warn("Notice: could not create node_modules/openclaw junction:", e.message);
   }
 }
 

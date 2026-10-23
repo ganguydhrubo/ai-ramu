@@ -82,7 +82,7 @@ function readPackageNameSync(dir: string): string | null {
 async function findPackageRoot(startDir: string): Promise<string | null> {
   for (const current of iterAncestorDirs(startDir)) {
     const name = await readPackageName(current);
-    if (name === "openclaw") {
+    if (name === "openclaw" || name === "ai-ramu") {
       return current;
     }
   }
@@ -92,7 +92,7 @@ async function findPackageRoot(startDir: string): Promise<string | null> {
 function findPackageRootSync(startDir: string): string | null {
   for (const current of iterAncestorDirs(startDir)) {
     const name = readPackageNameSync(current);
-    if (name === "openclaw") {
+    if (name === "openclaw" || name === "ai-ramu") {
       return current;
     }
   }

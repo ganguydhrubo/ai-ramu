@@ -10,9 +10,20 @@ const ramuPath = path.join(__dirname, "ramu.mjs");
 function runCommand(args) {
   return new Promise((resolve) => {
     const child = spawn(process.execPath, [ramuPath, ...args], {
-      stdio: "inherit",
       cwd: __dirname,
       env: process.env,
+    });
+    child.stdout?.on("data", (data) => {
+      let out = data.toString();
+      out = out.replace(/openclaw/gi, "ramu");
+      out = out.replace(/\.openclaw/g, ".ramu");
+      process.stdout.write(out);
+    });
+    child.stderr?.on("data", (data) => {
+      let out = data.toString();
+      out = out.replace(/openclaw/gi, "ramu");
+      out = out.replace(/\.openclaw/g, ".ramu");
+      process.stderr.write(out);
     });
     child.on("close", (code) => resolve(code ?? 0));
   });
@@ -65,8 +76,8 @@ export async function launchAll() {
       gw.unref();
     }
 
-    process.stdout.write("       Waiting for Gateway to be ready");
-    for (let i = 0; i < 35; i++) {
+    process.stdout.write("       Waiting for Gateway to initialize");
+    for (let i = 0; i < 75; i++) {
       process.stdout.write(".");
       await new Promise((r) => setTimeout(r, 1000));
       if (await isGatewayHealthy()) {
@@ -77,14 +88,19 @@ export async function launchAll() {
   }
 
   console.log("\n\x1b[34m[3/3] Opening Web Dashboard in your browser...\x1b[0m");
-  await runCommand(["dashboard", "--yes"]);
+  if (process.platform === "win32") {
+    spawn("powershell.exe", ["-Command", "Start-Process 'http://127.0.0.1:18789/'"], { stdio: "ignore", detached: true }).unref();
+  } else {
+    spawn("xdg-open", ["http://127.0.0.1:18789/"], { stdio: "ignore", detached: true }).unref();
+  }
 
   console.log("\n\x1b[32m======================================================================\x1b[0m");
-  console.log("\x1b[1m📱 WhatsApp Connection (Scan the QR Code Below with Your Phone):\x1b[0m");
-  console.log("\x1b[90mOpen WhatsApp > Settings > Linked Devices > Link a Device\x1b[0m");
+  console.log("\x1b[1m🇮🇳 AI RAMU is Online & Ready!\x1b[0m");
+  console.log("Web Dashboard: \x1b[36mhttp://127.0.0.1:18789/\x1b[0m");
+  console.log("Live Website:  \x1b[36mhttps://ganguydhrubo.github.io/ai-ramu/\x1b[0m");
+  console.log("To pair WhatsApp at any time:  \x1b[33mramu channels login --channel whatsapp\x1b[0m");
+  console.log("To add channels:               \x1b[33mramu channels add\x1b[0m");
   console.log("\x1b[32m======================================================================\x1b[0m\n");
-
-  await runCommand(["channels", "login", "--channel", "whatsapp"]);
 }
 
 async function main() {
