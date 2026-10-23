@@ -1,441 +1,189 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <!-- Primary Meta Tags -->
-  <title>AI Ramu — Your Personal AI Worker on WhatsApp | Runs on Your PC</title>
-  <meta name="title" content="AI Ramu — Your Personal AI Worker on WhatsApp | Runs on Your PC">
-  <meta name="description" content="AI Ramu is your personal autonomous AI worker. Install on your PC with 1 command, scan your WhatsApp QR, and control your computer from WhatsApp in Hindi, English, and Bengali. 100% free and private.">
-  <meta name="keywords" content="AI Ramu, airamu.site, WhatsApp AI, Personal AI worker, Self-hosted AI India, Hindi AI, Bengali AI, Desktop AI Automation">
-  <meta name="author" content="AI Ramu">
-  <meta name="theme-color" content="#FFFFFF">
-  <meta name="robots" content="index, follow">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>AI RAMU — Your AI, on WhatsApp</title>
+  <meta name="description" content="AI RAMU is a free, open-source AI worker that runs on your own computer. Link your WhatsApp, pick a model (local Ollama works without an API key) and say: Bolo Ramu, Kaam Shuru.">
   <link rel="canonical" href="https://airamu.site/">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#FBF8F3">
+  <link rel="icon" href="assets/favicon.ico" sizes="32x32">
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
 
-  <!-- Open Graph / Facebook / WhatsApp Preview -->
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="AI RAMU">
+  <meta property="og:title" content="AI RAMU — Your AI, on WhatsApp">
+  <meta property="og:description" content="Free, open-source AI worker that runs on your own computer. Bolo Ramu, Kaam Shuru.">
   <meta property="og:url" content="https://airamu.site/">
-  <meta property="og:title" content="AI Ramu — Your Personal AI Worker on WhatsApp">
-  <meta property="og:description" content="Install on your PC in 60 seconds, scan your WhatsApp QR code, and chat with your private AI worker in English, Hindi, and Bengali. 100% free.">
-  <meta property="og:image" content="https://airamu.site/assets/hero-banner.jpg">
-  <meta property="og:site_name" content="AI Ramu">
-  <meta property="og:locale" content="en_IN">
-
-  <!-- Twitter Card -->
+  <meta property="og:image" content="https://airamu.site/assets/social-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="AI RAMU — Your AI, on WhatsApp.">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://airamu.site/">
-  <meta name="twitter:title" content="AI Ramu — Your Personal AI Worker on WhatsApp">
-  <meta name="twitter:description" content="Install on your PC in 60 seconds, scan your WhatsApp QR code, and chat with your private AI worker in English, Hindi, and Bengali. 100% free.">
-  <meta name="twitter:image" content="https://airamu.site/assets/hero-banner.jpg">
+  <meta name="twitter:title" content="AI RAMU — Your AI, on WhatsApp">
+  <meta name="twitter:description" content="Free, open-source AI worker that runs on your own computer.">
+  <meta name="twitter:image" content="https://airamu.site/assets/social-card.png">
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/jpeg" href="assets/ramu-avatar.jpg">
-  <link rel="apple-touch-icon" href="assets/ramu-avatar.jpg">
-
-  <!-- Typography: Plus Jakarta Sans & Outfit -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
-
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
   <link rel="stylesheet" href="styles.css">
 
-  <!-- Structured Data: Schema.org -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "AI Ramu",
-    "headline": "Your Personal AI Worker on WhatsApp — Runs on Your PC",
-    "description": "Free, self-hosted autonomous AI worker installed on your PC and controlled via WhatsApp, supporting English, Hindi, and Bengali.",
+    "name": "AI RAMU",
+    "alternateName": "Bolo Ramu, Kaam Shuru",
+    "description": "Free, open-source AI worker that runs on your own computer and can be reached through WhatsApp.",
+    "url": "https://airamu.site/",
+    "image": "https://airamu.site/assets/icon-512.png",
+    "applicationCategory": "UtilitiesApplication",
     "operatingSystem": "Windows, macOS, Linux",
-    "applicationCategory": "ProductivityApplication",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "INR"
-    },
-    "url": "https://airamu.site",
-    "author": {
-      "@type": "Person",
-      "name": "Dhrubo Ganguly",
-      "url": "https://github.com/ganguydhrubo/ai-ramu"
-    }
+    "softwareRequirements": "Node.js 24.22.1 or newer",
+    "license": "https://github.com/ganguydhrubo/ai-ramu/blob/main/LICENSE",
+    "isAccessibleForFree": true,
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" },
+    "codeRepository": "https://github.com/ganguydhrubo/ai-ramu",
+    "author": { "@type": "Person", "name": "ganguydhrubo", "url": "https://github.com/ganguydhrubo" }
   }
   </script>
 </head>
 <body>
+  <a class="skip" href="#main">Skip to content</a>
 
-  <!-- Ambient Glow Canvas Background -->
-  <div class="ambient-glow glow-top" aria-hidden="true"></div>
-  <div class="ambient-glow glow-right" aria-hidden="true"></div>
-
-  <!-- Minimal Navigation -->
-  <header class="navbar" id="top">
-    <div class="container nav-container">
-      <a href="#" class="brand-group" aria-label="AI Ramu Home">
-        <img src="assets/ramu-avatar.jpg" alt="AI Ramu" class="brand-avatar" width="38" height="38">
-        <div class="brand-text">
-          <span class="brand-name">AI RAMU</span>
-          <span class="brand-tagline">airamu.site</span>
-        </div>
+  <header class="nav" id="top">
+    <div class="wrap nav__inner">
+      <a class="brand" href="#top" aria-label="AI RAMU home">
+        <img src="assets/icon.svg" width="36" height="36" alt="">
+        <span><b class="grad">AI</b> RAMU</span>
       </a>
-
-      <nav class="nav-links" aria-label="Main Navigation">
-        <a href="#quickstart">Quickstart</a>
-        <a href="#experience">WhatsApp Preview</a>
-        <a href="#how-it-works">How It Works</a>
-        <a href="#why-pc">Why on Your PC?</a>
-        <a href="#trust">Privacy</a>
-        <a href="https://github.com/ganguydhrubo/ai-ramu" target="_blank" rel="noopener noreferrer" class="nav-github-link">GitHub</a>
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu">
+        <span></span><span></span>
+      </button>
+      <nav class="nav__menu" id="nav-menu" aria-label="Primary">
+        <a href="#features">What it does</a>
+        <a href="#setup">Setup</a>
+        <a href="#open">Free &amp; open</a>
+        <a class="btn btn--ghost" href="https://github.com/ganguydhrubo/ai-ramu" rel="noopener">GitHub</a>
       </nav>
-
-      <div class="nav-actions">
-        <a href="#quickstart" class="btn btn-whatsapp-sm">
-          <span>Install on Your PC (Free)</span>
-        </a>
-      </div>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <main>
-    <section class="hero-section">
-      <div class="container hero-container">
-        
-        <!-- Trust & Value Pill -->
-        <div class="hero-badge">
-          <span class="badge-dot"></span>
-          <span class="badge-text">100% Free & Open Source • Self-Hosted on Your PC</span>
-        </div>
-
-        <!-- Primary Core Message (Headline) -->
-        <h1 class="hero-headline">
-          AI Ramu — <br class="mobile-break">
-          <span class="hero-gradient">Your Personal AI Worker.</span>
-        </h1>
-
-        <!-- Supporting Value Copy -->
-        <p class="hero-subtext">
-          Install AI Ramu on your computer in 60 seconds, scan the QR code with <strong>your own WhatsApp</strong>, and control your PC from anywhere — fluent in <strong>English, हिन्दी, and বাংলা</strong>.
-        </p>
-
-        <!-- 1-Command Terminal Box in Hero -->
-        <div class="terminal-quickstart-card" id="quickstart">
-          <div class="terminal-header">
-            <div class="terminal-dots">
-              <span class="dot red"></span>
-              <span class="dot yellow"></span>
-              <span class="dot green"></span>
-            </div>
-            <div class="terminal-title">Windows PowerShell / CMD / Mac / Linux</div>
-            <span class="terminal-badge">1-Command Run</span>
+  <main id="main">
+    <section class="hero">
+      <div class="wrap hero__grid">
+        <div class="hero__copy reveal">
+          <p class="eyebrow"><span class="dot" aria-hidden="true"></span> Free · open source · runs on your computer</p>
+          <h1><span class="grad">AI RAMU</span> —<br>Your AI, on WhatsApp.</h1>
+          <p class="lede">Link AI RAMU to your own WhatsApp, then message it like a friend. It can browse, work with your files, run scheduled jobs and answer with the AI model you choose. <strong>Bolo Ramu, Kaam Shuru.</strong></p>
+          <div class="cta">
+            <a class="btn btn--primary" href="#setup">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2l-.5-.2Z"/></svg>
+              Connect your WhatsApp
+            </a>
+            <a class="btn btn--ghost" href="https://github.com/ganguydhrubo/ai-ramu" rel="noopener">View source</a>
           </div>
-          <div class="terminal-body" id="hero-cmd-box">
-            <div class="command-line">
-              <span class="prompt-symbol">&gt;</span>
-              <span class="command-text" id="primary-cmd-text">npm start</span>
-              <span class="command-note"># or globally from any folder: <strong>ramu</strong></span>
-            </div>
-            <button type="button" class="btn-copy-cmd" id="copy-hero-cmd-btn" aria-label="Copy Command to Clipboard">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-              </svg>
-              <span id="hero-cmd-copy-status">Copy</span>
-            </button>
-          </div>
-          <div class="terminal-footer">
-            <span>⚡ Automatically starts local engine, opens dashboard & displays your WhatsApp pairing QR code.</span>
-          </div>
+          <p class="fineprint">Needs a computer (Windows, macOS or Linux) with Node.js 24.22.1+. No account with us, no subscription.</p>
         </div>
 
-        <!-- Primary Conversion Actions -->
-        <div class="hero-cta-wrapper">
-          <a href="#how-it-works" class="btn btn-whatsapp-lg">
-            <span>See 3-Step Setup Guide</span>
-          </a>
-
-          <!-- Distribution Button: One-Click Share -->
-          <button type="button" class="btn btn-share" id="share-wa-btn" aria-label="Share AI Ramu on WhatsApp">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <circle cx="18" cy="5" r="3"></circle>
-              <circle cx="6" cy="12" r="3"></circle>
-              <circle cx="18" cy="19" r="3"></circle>
-              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
-              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
-            </svg>
-            <span>Share with Friends</span>
-          </button>
-        </div>
-
-        <!-- Micro Value Signals -->
-        <div class="hero-micro-trust">
-          <span class="micro-item"><span class="check-icon">✓</span> Runs on Your Computer</span>
-          <span class="micro-divider">•</span>
-          <span class="micro-item"><span class="check-icon">✓</span> Your WhatsApp, 100% Private</span>
-          <span class="micro-divider">•</span>
-          <span class="micro-item"><span class="check-icon">✓</span> Completely Free Forever</span>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Why on Your PC Section (Addresses User's Core Insight) -->
-    <section class="why-pc-section" id="why-pc">
-      <div class="container">
-        
-        <div class="section-header text-center">
-          <div class="section-tag">Privacy & Architecture</div>
-          <h2 class="section-title">Why AI Ramu Runs on Your PC</h2>
-          <p class="section-subtitle">
-            You don't message strangers. You install AI Ramu on your own computer, scan your own QR code, and control your machine privately.
-          </p>
-        </div>
-
-        <div class="why-grid">
-          <div class="why-card">
-            <div class="why-icon">🔒</div>
-            <h3>Your WhatsApp, Your Privacy</h3>
-            <p>You never have to put your phone number on a public website. You link your own WhatsApp account so only <strong>you</strong> control your Ramu.</p>
-          </div>
-
-          <div class="why-card">
-            <div class="why-icon">🛡️</div>
-            <h3>100% Sovereign Data</h3>
-            <p>Your documents, spreadsheets, client chats, and passwords stay on your computer. No third-party cloud ever reads or stores your data.</p>
-          </div>
-
-          <div class="why-card">
-            <div class="why-icon">💻</div>
-            <h3>Real Computer Superpowers</h3>
-            <p>Because Ramu runs locally, it can manage your files, automate browser research, generate invoices, and execute tasks directly on your OS.</p>
-          </div>
-
-          <div class="why-card">
-            <div class="why-icon">🎁</div>
-            <h3>Zero Subscriptions / 100% Free</h3>
-            <p>No monthly charges, no cloud server costs, and no usage limits. You own the software and can run it freely forever.</p>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- WhatsApp Experience Demonstration -->
-    <section class="demo-section" id="experience">
-      <div class="container">
-        
-        <div class="section-header text-center">
-          <div class="section-tag">Interactive Experience</div>
-          <h2 class="section-title">What It Feels Like to Chat with Ramu</h2>
-          <p class="section-subtitle">
-            Tap the scenarios below to see real conversations. Ramu understands voice notes, mixed languages, and gives direct, useful answers.
-          </p>
-        </div>
-
-        <!-- Interactive Scenario Pills -->
-        <div class="scenario-selector" role="tablist" aria-label="Chat Scenario Selection">
-          <button type="button" class="scenario-btn active" role="tab" aria-selected="true" data-scenario="daily">
-            <span>☕ Daily Work & Chores</span>
-          </button>
-          <button type="button" class="scenario-btn" role="tab" aria-selected="false" data-scenario="hindi">
-            <span>🇮🇳 Hinglish Assistance</span>
-          </button>
-          <button type="button" class="scenario-btn" role="tab" aria-selected="false" data-scenario="bengali">
-            <span>🇧🇩 বাংলা (Bengali) Chat</span>
-          </button>
-          <button type="button" class="scenario-btn" role="tab" aria-selected="false" data-scenario="research">
-            <span>⚡ Research & Calculations</span>
-          </button>
-        </div>
-
-        <!-- Smartphone Device Mockup -->
-        <div class="phone-mockup-wrapper">
-          <div class="phone-mockup">
-            
-            <!-- WhatsApp Chat Header -->
-            <div class="wa-chat-header">
-              <div class="wa-back-btn" aria-hidden="true">‹</div>
-              <img src="assets/ramu-avatar.jpg" alt="AI Ramu Avatar" class="wa-chat-avatar" width="40" height="40">
-              <div class="wa-chat-meta">
-                <div class="wa-chat-title">
-                  <strong>AI Ramu</strong>
-                  <span class="wa-verified-badge" title="Verified Assistant">✓</span>
-                </div>
-                <div class="wa-chat-status">online • your personal ai</div>
-              </div>
-              <div class="wa-header-icons" aria-hidden="true">
-                <span class="wa-icon-call">📞</span>
-                <span class="wa-icon-dots">⋮</span>
-              </div>
-            </div>
-
-            <!-- Chat Message Thread Canvas -->
-            <div class="wa-chat-body" id="chat-stream">
-              <!-- Dynamically injected via script.js -->
-            </div>
-
-            <!-- WhatsApp Fake Input Bar -->
-            <div class="wa-chat-footer" aria-hidden="true">
-              <span class="wa-input-emoji">😊</span>
-              <div class="wa-input-box">Message AI Ramu...</div>
-              <span class="wa-input-mic">🎤</span>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- Secondary Demo Prompt -->
-        <div class="demo-cta-box text-center">
-          <p>Ready to install Ramu on your machine?</p>
-          <a href="#quickstart" class="btn btn-whatsapp-md">
-            <span>Install on Your PC in 60s</span>
-          </a>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- How It Works Section (3 Clean Steps) -->
-    <section class="steps-section" id="how-it-works">
-      <div class="container">
-        
-        <div class="section-header text-center">
-          <div class="section-tag">Simple & Frictionless</div>
-          <h2 class="section-title">How to Get Started in 3 Steps</h2>
-          <p class="section-subtitle">No accounts, no downloads, no credit cards. Start in less than 60 seconds.</p>
-        </div>
-
-        <div class="steps-grid">
-          
-          <div class="step-card">
-            <div class="step-number">1</div>
-            <div class="step-icon-wrap">
-              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#25D366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                <line x1="8" y1="21" x2="16" y2="21"></line>
-                <line x1="12" y1="17" x2="12" y2="21"></line>
-              </svg>
-            </div>
-            <h3 class="step-heading">1. Run on Your PC</h3>
-            <p class="step-desc">
-              Open PowerShell or Terminal on your computer and run <code>npm start</code> (or simply type <code>ramu</code>). The local engine starts in seconds.
-            </p>
-          </div>
-
-          <div class="step-card">
-            <div class="step-number">2</div>
-            <div class="step-icon-wrap">
-              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <rect x="3" y="3" width="7" height="7"></rect>
-                <rect x="14" y="3" width="7" height="7"></rect>
-                <rect x="14" y="14" width="7" height="7"></rect>
-                <rect x="3" y="14" width="7" height="7"></rect>
-              </svg>
-            </div>
-            <h3 class="step-heading">2. Scan WhatsApp QR</h3>
-            <p class="step-desc">
-              A QR code appears in your terminal. Open WhatsApp on your phone &gt; Settings &gt; Linked Devices &gt; Link a Device, and scan the screen.
-            </p>
-          </div>
-
-          <div class="step-card">
-            <div class="step-number">3</div>
-            <div class="step-icon-wrap">
-              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#0284C7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-              </svg>
-            </div>
-            <h3 class="step-heading">3. Chat on WhatsApp</h3>
-            <p class="step-desc">
-              Bolo Ramu, Kaam Shuru! Message Ramu in English, Hindi, or Bengali. Speak or type to delegate daily tasks, research, and reminders.
-            </p>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Distribution & Share Section -->
-    <section class="share-section">
-      <div class="container">
-        <div class="share-card">
-          <div class="share-content">
-            <div class="section-tag saffron-tag">Easy Distribution</div>
-            <h2 class="share-title">Help India Work Smarter — Share AI Ramu</h2>
-            <p class="share-desc">
-              Share AI Ramu with your friends, colleagues, or community so they can run their own free AI assistant on their PC.
-            </p>
-            
-            <div class="share-actions">
-              <a href="https://api.whatsapp.com/send?text=Hey!%20Check%20out%20AI%20Ramu%20%E2%80%94%20a%20free%20personal%20AI%20worker%20you%20install%20on%20your%20PC%20and%20control%20from%20WhatsApp%20in%20Hindi%2C%20English%20and%20Bengali%3A%20https%3A%2F%2Fairamu.site" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp-md">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
-                  <path d="M12.031 2C6.5 2 2 6.5 2 12.031c0 1.969.57 3.82 1.625 5.398L2.094 22l4.734-1.516a9.98 9.98 0 0 0 5.203 1.547c5.531 0 10.031-4.5 10.031-10.031C22.062 6.5 17.562 2 12.031 2zm5.781 14.188c-.25.688-1.438 1.344-1.984 1.406-.5.063-1.125.094-3.563-.875-3.094-1.25-5.062-4.406-5.219-4.594-.156-.188-1.25-1.656-1.25-3.156 0-1.5 0.781-2.25 1.062-2.563.281-.313.625-.375.844-.375.219 0 .438.003.625.016.203.016.469-.078.734.563.281.688.938 2.313 1.031 2.484.094.188.156.406.031.656-.125.25-.188.375-.375.594-.188.219-.406.484-.578.656-.188.188-.391.406-.172.781.219.375.969 1.594 2.078 2.578 1.438 1.281 2.656 1.688 3.031 1.875.375.188.594.156.813-.094.219-.25.938-1.094 1.188-1.469.25-.375.5-.313.844-.188.344.125 2.188 1.031 2.563 1.219.375.188.625.281.719.438.094.156.094.906-.156 1.594z"/>
-                </svg>
-                <span>Forward via WhatsApp</span>
-              </a>
-
-              <button type="button" class="btn btn-copy-link" id="copy-url-btn">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                </svg>
-                <span id="copy-text">Copy Link</span>
-              </button>
+        <div class="hero__visual reveal" aria-hidden="true">
+          <div class="phone">
+            <div class="phone__bar"><img src="assets/icon.svg" width="28" height="28" alt=""><div><b>Ramu</b><small>linked device · online</small></div></div>
+            <div class="chat">
+              <p class="msg msg--me">Ramu, kal subah 8 baje mujhe aaj ki top news ka summary bhejna.</p>
+              <p class="msg">Done ✓ Scheduled a daily 8:00 AM job. You'll get the summary here on WhatsApp.</p>
+              <p class="msg msg--me">Aur Downloads folder mein jo PDFs hain unki list?</p>
+              <p class="msg">Found 6 PDFs. Want me to sort them into folders by month?</p>
             </div>
           </div>
+          <p class="visual-note">Illustration. Replies depend on the model and tools you enable.</p>
         </div>
       </div>
     </section>
 
-    <!-- Final High-Impact CTA -->
-    <section class="final-cta-section">
-      <div class="container text-center">
-        <h2 class="final-title">Bolo Ramu, Kaam Shuru.</h2>
-        <p class="final-subtitle">Run on your PC right now and let your personal AI worker take care of your daily digital toil.</p>
-        
-        <div class="final-actions">
-          <a href="#quickstart" class="btn btn-whatsapp-lg">
-            <span>Install on Your PC — 100% Free</span>
-          </a>
+    <section class="section" id="features">
+      <div class="wrap">
+        <h2 class="reveal">What AI RAMU does</h2>
+        <p class="sub reveal">Everything below ships in the open-source engine AI RAMU is built on and is configured from one dashboard on your machine.</p>
+        <ul class="cards">
+          <li class="card reveal"><span class="ico">💬</span><h3>Chat on WhatsApp</h3><p>Pair once with WhatsApp's <em>Linked devices</em> QR code. Telegram, Discord, Slack and other channels are available too.</p></li>
+          <li class="card reveal"><span class="ico">🧠</span><h3>Your choice of model</h3><p>Run a local model with Ollama, LM Studio or vLLM, or connect a provider such as Google Gemini, OpenRouter, OpenAI or Anthropic.</p></li>
+          <li class="card reveal"><span class="ico">🌐</span><h3>Browser automation</h3><p>A dedicated Chrome/Chromium profile the agent can drive to look things up and fill in pages.</p></li>
+          <li class="card reveal"><span class="ico">⏰</span><h3>Scheduled jobs</h3><p>Recurring tasks with cron schedules — reminders, summaries, checks — that report back to your chat.</p></li>
+          <li class="card reveal"><span class="ico">🗂️</span><h3>Files, tools &amp; skills</h3><p>Workspace files, shell commands with approval prompts, plugins and skills you can turn on or off.</p></li>
+          <li class="card reveal"><span class="ico">🖥️</span><h3>Local dashboard</h3><p>Chat, sessions, channels, schedules, logs and health checks at <code>127.0.0.1:18789</code>.</p></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section section--tint" id="setup">
+      <div class="wrap">
+        <h2 class="reveal">Set up in four steps</h2>
+        <p class="sub reveal">About 10 minutes on a typical home connection. Windows users can double-click <code>START_AI_RAMU.bat</code> after step 2.</p>
+        <ol class="steps">
+          <li class="step reveal">
+            <h3>Install Node.js 24 LTS</h3>
+            <p>From <a href="https://nodejs.org/" rel="noopener">nodejs.org</a>, or on Windows:</p>
+            <pre><code>winget install OpenJS.NodeJS.LTS</code></pre>
+          </li>
+          <li class="step reveal">
+            <h3>Download AI RAMU</h3>
+            <pre><code>git clone https://github.com/ganguydhrubo/ai-ramu
+cd ai-ramu
+npm install</code></pre>
+          </li>
+          <li class="step reveal">
+            <h3>Start &amp; pick a model</h3>
+            <pre><code>npm start
+npm run onboard</code></pre>
+            <p>Starts the gateway, opens the dashboard, then lets you choose a model. Choose <b>Ollama</b> for a fully local, key-free setup.</p>
+          </li>
+          <li class="step step--wa reveal">
+            <h3>Connect WhatsApp</h3>
+            <pre><code>npm run whatsapp</code></pre>
+            <p>On your phone: <b>WhatsApp → Settings → Linked devices → Link a device</b>, then scan the QR code shown in the terminal.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section" id="open">
+      <div class="wrap open">
+        <div class="reveal">
+          <h2>Free &amp; open, honestly</h2>
+          <ul class="ticks">
+            <li><b>Free software.</b> MIT licensed, no paid tiers, no feature gates.</li>
+            <li><b>Runs on your machine.</b> Config, sessions and WhatsApp credentials stay in your user folder.</li>
+            <li><b>Your model, your bill.</b> Local models cost nothing extra. Cloud providers have their own pricing and free-tier limits.</li>
+            <li><b>Your WhatsApp account.</b> AI RAMU links as one of your devices, so WhatsApp's own terms apply.</li>
+            <li><b>Built in the open.</b> AI RAMU packages the MIT-licensed OpenClaw engine with its own branding, launcher and update checks; upstream notices are kept in the repository.</li>
+          </ul>
+        </div>
+        <div class="open__card reveal">
+          <img src="assets/icon.svg" width="88" height="88" alt="">
+          <p class="tagline">Bolo Ramu, Kaam Shuru.</p>
+          <a class="btn btn--primary" href="#setup">Get started</a>
+          <a class="btn btn--ghost" href="https://github.com/ganguydhrubo/ai-ramu" rel="noopener">Star on GitHub</a>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- Minimal Essential Footer -->
   <footer class="footer">
-    <div class="container footer-container">
-      
-      <div class="footer-brand">
-        <div class="brand-group">
-          <img src="assets/ramu-avatar.jpg" alt="AI Ramu" class="brand-avatar" width="30" height="30">
-          <span class="brand-name">AI RAMU</span>
-        </div>
-        <p class="footer-tagline">airamu.site • Your Personal AI Worker. Runs on Your PC.</p>
-      </div>
-
-      <div class="footer-links">
-        <a href="#quickstart">Quickstart</a>
-        <a href="#how-it-works">How It Works</a>
-        <a href="#why-pc">Why on Your PC?</a>
-        <a href="https://github.com/ganguydhrubo/ai-ramu" target="_blank" rel="noopener noreferrer">Source Code</a>
-      </div>
-
-      <div class="footer-bottom">
-        <p>© 2026 AI Ramu. Open-source software released under the MIT License.</p>
-        <p class="disclaimer">Independent open-source project. WhatsApp is a registered trademark of Meta Platforms, Inc. AI Ramu runs locally on the user's machine.</p>
-      </div>
-
+    <div class="wrap footer__inner">
+      <p><b class="grad">AI</b> RAMU · MIT licensed</p>
+      <nav aria-label="Legal">
+        <a href="https://github.com/ganguydhrubo/ai-ramu/blob/main/LICENSE" rel="noopener">License</a>
+        <a href="https://github.com/ganguydhrubo/ai-ramu/blob/main/THIRD_PARTY_NOTICES.md" rel="noopener">Third-party notices</a>
+        <a href="https://github.com/ganguydhrubo/ai-ramu" rel="noopener">Source</a>
+      </nav>
     </div>
   </footer>
 
-  <!-- Toast Notice -->
-  <div class="toast-notice" id="toast" role="status" aria-live="polite">Link copied to clipboard!</div>
-
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
 </body>
 </html>

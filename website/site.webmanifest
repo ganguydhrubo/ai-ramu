@@ -1,0 +1,14 @@
+{
+  "name": "AI RAMU",
+  "short_name": "AI RAMU",
+  "description": "Your AI, on WhatsApp. Bolo Ramu, Kaam Shuru.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FBF8F3",
+  "theme_color": "#FBF8F3",
+  "icons": [
+    { "src": "assets/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "assets/icon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}

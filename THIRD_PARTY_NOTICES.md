@@ -1,8 +1,45 @@
 # Third-party notices
 
-This file records third-party notices for code or substantial implementation
-portions incorporated into OpenClaw source, beyond normal package-manager
-dependency metadata.
+AI RAMU installs and modifies the following software. Their licenses apply to those
+components. The installed engine also ships its own `LICENSE` and
+`THIRD_PARTY_NOTICES.md` inside `node_modules/openclaw/`, and they are kept unchanged.
+
+## OpenClaw (engine)
+
+- Source: https://github.com/openclaw/openclaw
+- Package: `openclaw` on npm (exact version pinned in `package.json`)
+- Modifications: user-facing text, icons and the web manifest are rebranded at install
+  time by `scripts/rebrand-engine.mjs`. Integrity metadata is regenerated to match.
+- "OpenClaw" and its logos are the upstream project's marks. AI RAMU uses its own name and
+  logo and does not claim endorsement.
+
+```
+MIT License
+
+Copyright (c) 2026 OpenClaw Foundation
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
+
+## Notices carried by the engine
+
+The following is reproduced from the engine's own `THIRD_PARTY_NOTICES.md`:
 
 ## SQLite
 
