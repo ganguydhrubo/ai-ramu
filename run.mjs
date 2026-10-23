@@ -47,17 +47,26 @@ export async function launchAll() {
     console.log("       Gateway is already active on http://127.0.0.1:18789");
   } else {
     console.log("       Starting Gateway service in background...");
-    const gw = spawn(process.execPath, [ramuPath, "gateway", "run"], {
-      detached: true,
-      stdio: "ignore",
-      cwd: __dirname,
-      env: process.env,
-      windowsHide: true,
-    });
-    gw.unref();
+    if (process.platform === "win32") {
+      spawn("powershell.exe", [
+        "-Command",
+        `Start-Process "${process.execPath}" -ArgumentList '"${ramuPath}"', 'gateway', 'run' -WindowStyle Hidden`
+      ], {
+        detached: true,
+        stdio: "ignore"
+      }).unref();
+    } else {
+      const gw = spawn(process.execPath, [ramuPath, "gateway", "run"], {
+        detached: true,
+        stdio: "ignore",
+        cwd: __dirname,
+        env: process.env,
+      });
+      gw.unref();
+    }
 
     process.stdout.write("       Waiting for Gateway to be ready");
-    for (let i = 0; i < 25; i++) {
+    for (let i = 0; i < 35; i++) {
       process.stdout.write(".");
       await new Promise((r) => setTimeout(r, 1000));
       if (await isGatewayHealthy()) {

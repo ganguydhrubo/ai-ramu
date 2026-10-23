@@ -42,9 +42,8 @@
     "url": "git+https://github.com/ganguydhrubo/ai-ramu.git"
   },
   "bin": {
-    "ai-ramu": "openclaw.mjs",
-    "ramu": "openclaw.mjs",
-    "openclaw": "openclaw.mjs"
+    "ai-ramu": "ramu.mjs",
+    "ramu": "ramu.mjs"
   },
   "publishConfig": {
     "executableFiles": [
@@ -2078,7 +2077,6 @@
     "runtime-sidecars:gen": "node --import ./scripts/tsx.mjs scripts/generate-runtime-sidecar-paths-baseline.ts --write",
     "sqlite:sessions-schema:check": "node --import ./scripts/tsx.mjs scripts/generate-sqlite-session-schema-baseline.ts --check",
     "sqlite:sessions-schema:gen": "node --import ./scripts/tsx.mjs scripts/generate-sqlite-session-schema-baseline.ts --write",
-    "start": "node openclaw.mjs",
     "test": "node scripts/test-projects.mts",
     "test:all": "pnpm lint && pnpm build && pnpm test && pnpm test:e2e && pnpm test:live && pnpm test:docker:all",
     "test:auth:compat": "node scripts/run-vitest.mjs run --config test/vitest/vitest.gateway.config.ts src/gateway/server.auth.compat-baseline.test.ts src/gateway/client.test.ts src/gateway/reconnect-gating.test.ts && node scripts/run-vitest.mjs run packages/gateway-protocol/src/connect-error-details.test.ts",

@@ -15,9 +15,8 @@ if (existsSync(pkgPath)) {
   pkg.name = "ai-ramu";
   pkg.description = "AI RAMU — Bolo Ramu, Kaam Shuru. Personal AI Worker, Desktop Agent and Automation Platform.";
   pkg.bin = {
-    "ai-ramu": "openclaw.mjs",
-    "ramu": "openclaw.mjs",
-    "openclaw": "openclaw.mjs"
+    "ai-ramu": "ramu.mjs",
+    "ramu": "ramu.mjs"
   };
   pkg.scripts = pkg.scripts || {};
   pkg.scripts["start"] = "node run.mjs --all";
