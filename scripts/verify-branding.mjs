@@ -94,7 +94,7 @@ async function verifyDashboard(base, checks) {
 
   // Every boot script, fetched both compressed and plain: must decode to the same
   // bytes (proves .br/.gz were regenerated) and contain no product-name prose.
-  const scripts = [...root.text.matchAll(/(?:src|href)="\.\/(assets\/[^"]+\.js)"/g)].map((m) => m[1]);
+  const scripts = [...root.text.matchAll(/(?:src|href)="([^"]*?assets\/[^"?]+\.js)(?:\?[^"]*)?"/g)].map((m) => m[1]);
   let proseLeaks = 0;
   let mismatched = 0;
   for (const script of scripts) {
@@ -138,10 +138,13 @@ async function main() {
   for (const command of commands) {
     const out = run([command, "--help"]);
     const leaks = findLeaks(out);
+    // Root help lists plugin commands that only exist once that plugin is set up;
+    // their "unknown command" output is still scanned for leaks.
+    const unavailable = /does not know the command/.test(out);
     checks.push({
       surface: `ramu ${command} --help`,
-      ok: out.includes("Usage: ramu ") && leaks.length === 0,
-      detail: leaks.length ? leaks.slice(0, 3) : "clean",
+      ok: (out.includes("Usage: ramu ") || unavailable) && leaks.length === 0,
+      detail: leaks.length ? leaks.slice(0, 3) : unavailable ? "clean (plugin command not set up here)" : "clean",
     });
   }
 

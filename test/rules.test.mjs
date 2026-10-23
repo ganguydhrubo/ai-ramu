@@ -36,7 +36,26 @@ test("pre-rendered help and flag-style hints are rebranded", () => {
 });
 
 test("verifier treats repo slugs, paths and file names as identifiers", () => {
-  assert.deepEqual(findLeaks("create an openclaw/openclaw issue; /tmp/openclaw/uploads; ./openclaw.patch.json5"), []);
+  assert.deepEqual(findLeaks("create an openclaw/openclaw issue; /tmp/openclaw/uploads; ./openclaw.patch.json5; [openclaw] Reason: x"), []);
+});
+
+// Found by CI on a fresh Linux install of engine 2026.10.6.
+test("root help, wrapped words and argv-built hints are rebranded", () => {
+  assert.equal(cli("\\n\\nUsage: openclaw [options] [command]"), "\\n\\nUsage: ramu [options] [command]");
+  assert.equal(cli("transcripts in ordinary OpenClaw\\n   sessions"), "transcripts in ordinary AI RAMU\\n   sessions");
+});
+
+test("targeted rules: baked banner and argv help hint", async () => {
+  const { TARGETED_RULES } = await import("../branding/rules.mjs");
+  const apply = (id, text) => {
+    const rule = TARGETED_RULES.find((r) => r.id === id);
+    return text.replace(rule.find, rule.replace);
+  };
+  assert.equal(
+    apply("prerendered-banner", '"\\nAI RAMU 2026.10.6 (fe06181) — All your chats, one AI RAMU.\\n\\nUsage'),
+    '"\\nAI RAMU 2026.10.6 (fe06181) — Bolo Ramu, Kaam Shuru.\\n\\nUsage',
+  );
+  assert.equal(apply("help-hint-argv", 'formatCliCommand([\n\t\t"openclaw",\n'), 'formatCliCommand([\n\t\t"ramu",\n');
 });
 
 test("technical identifiers are preserved", () => {

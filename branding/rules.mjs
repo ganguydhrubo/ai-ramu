@@ -19,7 +19,7 @@ const esc = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 // profiles and launchd plists and later searches for, so they must not change.
 const IDENT_BEFORE = String.raw`(?:(?<=\\n)|(?<![A-Za-z0-9_$.\-/@#\\^]))(?<!# )(?<!<string>)`;
 const IDENT_AFTER =
-  String.raw`(?![A-Za-z0-9_$/@#\\]|-[A-Z0-9]|\.(?:app|exe|json|json5|mjs|cjs|js|ts|plist|log|lnk|cmd|sh|ps1|md)\b| Nerd Symbols)`;
+  String.raw`(?![A-Za-z0-9_$/@#]|\\(?!n)|-[A-Z0-9]|\.(?:app|exe|json|json5|mjs|cjs|js|ts|plist|log|lnk|cmd|sh|ps1|md)\b| Nerd Symbols)`;
 
 // Prose mentions of the upstream product name, e.g. "OpenClaw is thinking…",
 // "Update OpenClaw", "OpenClawの", "OpenClaw-hosted tools".
@@ -62,7 +62,7 @@ export function parseRootCommands(rootHelpText) {
 const CMD_BEFORE = String.raw`(?:(?<=\\n)|(?<![A-Za-z0-9_$.\-/@#\\:^]))(?<!-g )(?<!install )(?<!add )`;
 export function buildCommandHintPattern(commands = FALLBACK_COMMANDS) {
   const names = [...new Set(commands)].sort((a, b) => b.length - a.length).map(esc).join("|");
-  return new RegExp(`${CMD_BEFORE}${ENGINE.packageName}(?= (?:(?:${names})(?![A-Za-z0-9_-])|--[a-z]))`, "g");
+  return new RegExp(`${CMD_BEFORE}${ENGINE.packageName}(?= (?:(?:${names})(?![A-Za-z0-9_-])|--[a-z]|\\[))`, "g");
 }
 export const COMMAND_HINT_PATTERN = buildCommandHintPattern();
 
@@ -184,6 +184,22 @@ export const TARGETED_RULES = [
     applied: new RegExp(`\`${BRAND.product} \\$\\{VERSION\\}`),
   },
   {
+    id: "prerendered-banner",
+    scope: "cli",
+    required: false,
+    description: "Banner lines baked into cli-startup-metadata.json help texts",
+    find: /(?:OpenClaw|AI RAMU) (\d+\.\d+\.\d+[^ "\\]*) \(([0-9a-f]+)\) — (?!Bolo Ramu)[^"\\]*/g,
+    replace: `${BRAND.product} $1 ($2) — ${BRAND.tagline}`,
+  },
+  {
+    id: "help-hint-argv",
+    scope: "cli",
+    required: false,
+    description: "`Try: openclaw --help` hint assembled from an argv array",
+    find: /formatCliCommand\(\[\n(\t*)"openclaw",/g,
+    replace: `formatCliCommand([\n$1"${BRAND.cli}",`,
+  },
+  {
     id: "dashboard-title",
     scope: "ui-html",
     required: true,
@@ -239,6 +255,7 @@ export const ALLOWED_IDENTIFIERS = [
   /openclaw-[a-z0-9-]+/g, // service, task and plugin ids
   /X-OpenClaw-[A-Za-z-]+/g,
   /npm (?:i|install) -g openclaw\S*/g,
+  /\[openclaw\]/g, // log prefix the engine parses back out of child stderr
   /\bopenclaw\/openclaw\b/g, // upstream GitHub repo slug (issue reporting)
   /[\\/]openclaw(?=[\\/])/g, // filesystem paths such as /tmp/openclaw/…
   /\bopenclaw(?:\.[a-z0-9-]+)+\b/g, // file names such as openclaw.patch.json5
