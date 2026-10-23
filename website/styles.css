@@ -356,6 +356,130 @@ p {
   font-weight: 600;
 }
 
+/* Terminal Quickstart Box in Hero */
+.terminal-quickstart-card {
+  background-color: #0F172A;
+  color: #F8FAFC;
+  border-radius: var(--radius-lg);
+  border: 1px solid #1E293B;
+  box-shadow: 0 16px 36px -8px rgba(15, 23, 42, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  max-width: 680px;
+  margin: 0 auto 32px;
+  overflow: hidden;
+  text-align: left;
+}
+
+.terminal-header {
+  background-color: #1E293B;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #334155;
+}
+
+.terminal-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.terminal-dots .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.dot.red { background-color: #EF4444; }
+.dot.yellow { background-color: #F59E0B; }
+.dot.green { background-color: #10B981; }
+
+.terminal-title {
+  font-family: var(--font-code);
+  font-size: 0.76rem;
+  color: #94A3B8;
+  letter-spacing: -0.01em;
+}
+
+.terminal-badge {
+  background-color: rgba(16, 185, 129, 0.2);
+  color: #34D399;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+}
+
+.terminal-body {
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font-family: var(--font-code);
+}
+
+.command-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.15rem;
+  flex-wrap: wrap;
+}
+
+.prompt-symbol {
+  color: #F59E0B;
+  font-weight: 700;
+  user-select: none;
+}
+
+.command-text {
+  color: #38BDF8;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.command-note {
+  font-size: 0.85rem;
+  color: #64748B;
+  font-family: var(--font-body);
+}
+
+.command-note strong {
+  color: #E2E8F0;
+  font-family: var(--font-code);
+}
+
+.btn-copy-cmd {
+  background-color: #334155;
+  color: #F8FAFC;
+  border: 1px solid #475569;
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.btn-copy-cmd:hover {
+  background-color: #475569;
+  border-color: #64748B;
+  transform: translateY(-1px);
+}
+
+.terminal-footer {
+  background-color: #0B1120;
+  padding: 8px 16px;
+  font-size: 0.78rem;
+  color: #94A3B8;
+  border-top: 1px solid #1E293B;
+}
+
 .hero-cta-wrapper {
   display: flex;
   align-items: center;

@@ -83,18 +83,16 @@
       </a>
 
       <nav class="nav-links" aria-label="Main Navigation">
-        <a href="#experience">Experience</a>
+        <a href="#quickstart">Quickstart</a>
+        <a href="#experience">WhatsApp Chat</a>
         <a href="#how-it-works">How It Works</a>
         <a href="#trust">Trust & Privacy</a>
         <a href="https://github.com/ganguydhrubo/ai-ramu" target="_blank" rel="noopener noreferrer" class="nav-github-link">GitHub</a>
       </nav>
 
       <div class="nav-actions">
-        <a href="https://wa.me/?text=Hi%20AI%20Ramu%2C%20let%27s%20get%20started!" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp-sm">
-          <svg class="wa-icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
-            <path d="M12.031 2C6.5 2 2 6.5 2 12.031c0 1.969.57 3.82 1.625 5.398L2.094 22l4.734-1.516a9.98 9.98 0 0 0 5.203 1.547c5.531 0 10.031-4.5 10.031-10.031C22.062 6.5 17.562 2 12.031 2zm5.781 14.188c-.25.688-1.438 1.344-1.984 1.406-.5.063-1.125.094-3.563-.875-3.094-1.25-5.062-4.406-5.219-4.594-.156-.188-1.25-1.656-1.25-3.156 0-1.5 0.781-2.25 1.062-2.563.281-.313.625-.375.844-.375.219 0 .438.003.625.016.203.016.469-.078.734.563.281.688.938 2.313 1.031 2.484.094.188.156.406.031.656-.125.25-.188.375-.375.594-.188.219-.406.484-.578.656-.188.188-.391.406-.172.781.219.375.969 1.594 2.078 2.578 1.438 1.281 2.656 1.688 3.031 1.875.375.188.594.156.813-.094.219-.25.938-1.094 1.188-1.469.25-.375.5-.313.844-.188.344.125 2.188 1.031 2.563 1.219.375.188.625.281.719.438.094.156.094.906-.156 1.594z"/>
-          </svg>
-          <span>Chat on WhatsApp</span>
+        <a href="#quickstart" class="btn btn-whatsapp-sm">
+          <span>Run on Your PC (Free)</span>
         </a>
       </div>
     </div>
@@ -119,16 +117,43 @@
 
         <!-- Supporting Value Copy -->
         <p class="hero-subtext">
-          No separate apps to download. No confusing dashboards. Chat, ask questions, draft messages, and delegate everyday tasks directly through your WhatsApp — fluent in <strong>English, हिन्दी, and বাংলা</strong>.
+          Start AI Ramu on your PC with <strong>one single command</strong>, scan the WhatsApp QR code with your phone, and chat with your personal AI worker directly on WhatsApp — fluent in <strong>English, हिन्दी, and বাংলা</strong>.
         </p>
+
+        <!-- 1-Command Terminal Box in Hero -->
+        <div class="terminal-quickstart-card" id="quickstart">
+          <div class="terminal-header">
+            <div class="terminal-dots">
+              <span class="dot red"></span>
+              <span class="dot yellow"></span>
+              <span class="dot green"></span>
+            </div>
+            <div class="terminal-title">Windows PowerShell / Command Prompt / Mac / Linux</div>
+            <span class="terminal-badge">100% Free</span>
+          </div>
+          <div class="terminal-body" id="hero-cmd-box">
+            <div class="command-line">
+              <span class="prompt-symbol">&gt;</span>
+              <span class="command-text" id="primary-cmd-text">npm start</span>
+              <span class="command-note"># or globally from any folder: <strong>ramu</strong></span>
+            </div>
+            <button type="button" class="btn-copy-cmd" id="copy-hero-cmd-btn" aria-label="Copy Command to Clipboard">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <span id="hero-cmd-copy-status">Copy</span>
+            </button>
+          </div>
+          <div class="terminal-footer">
+            <span>⚡ Starts local engine, opens dashboard & displays your WhatsApp QR code automatically.</span>
+          </div>
+        </div>
 
         <!-- Primary Conversion Actions -->
         <div class="hero-cta-wrapper">
-          <a href="https://wa.me/?text=Hi%20AI%20Ramu%2C%20let%27s%20get%20started!" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp-lg" id="primary-cta">
-            <svg class="wa-icon-lg" viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true">
-              <path d="M12.031 2C6.5 2 2 6.5 2 12.031c0 1.969.57 3.82 1.625 5.398L2.094 22l4.734-1.516a9.98 9.98 0 0 0 5.203 1.547c5.531 0 10.031-4.5 10.031-10.031C22.062 6.5 17.562 2 12.031 2zm5.781 14.188c-.25.688-1.438 1.344-1.984 1.406-.5.063-1.125.094-3.563-.875-3.094-1.25-5.062-4.406-5.219-4.594-.156-.188-1.25-1.656-1.25-3.156 0-1.5 0.781-2.25 1.062-2.563.281-.313.625-.375.844-.375.219 0 .438.003.625.016.203.016.469-.078.734.563.281.688.938 2.313 1.031 2.484.094.188.156.406.031.656-.125.25-.188.375-.375.594-.188.219-.406.484-.578.656-.188.188-.391.406-.172.781.219.375.969 1.594 2.078 2.578 1.438 1.281 2.656 1.688 3.031 1.875.375.188.594.156.813-.094.219-.25.938-1.094 1.188-1.469.25-.375.5-.313.844-.188.344.125 2.188 1.031 2.563 1.219.375.188.625.281.719.438.094.156.094.906-.156 1.594z"/>
-            </svg>
-            <span>Start on WhatsApp — It’s Free</span>
+          <a href="#how-it-works" class="btn btn-whatsapp-lg">
+            <span>See 3-Step Setup (60 Seconds)</span>
           </a>
 
           <!-- Distribution Button: One-Click Share -->
@@ -247,12 +272,14 @@
             <div class="step-number">1</div>
             <div class="step-icon-wrap">
               <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#25D366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                <line x1="8" y1="21" x2="16" y2="21"></line>
+                <line x1="12" y1="17" x2="12" y2="21"></line>
               </svg>
             </div>
-            <h3 class="step-heading">Open WhatsApp</h3>
+            <h3 class="step-heading">1. Run on Your PC</h3>
             <p class="step-desc">
-              Click the WhatsApp button or connect your number. AI Ramu joins your existing chat screen immediately.
+              Open PowerShell or Terminal and run <code>npm start</code> (or simply type <code>ramu</code>). The local engine starts automatically.
             </p>
           </div>
 
@@ -260,15 +287,15 @@
             <div class="step-number">2</div>
             <div class="step-icon-wrap">
               <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
-                <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
-                <line x1="12" y1="19" x2="12" y2="23"></line>
-                <line x1="8" y1="23" x2="16" y2="23"></line>
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
               </svg>
             </div>
-            <h3 class="step-heading">Speak or Type</h3>
+            <h3 class="step-heading">2. Scan WhatsApp QR</h3>
             <p class="step-desc">
-              Ask anything in English, Hindi, Bengali, or Hinglish. Send voice notes or text naturally, just like messaging a friend.
+              Scan the terminal QR code with your phone (Open WhatsApp &gt; Settings &gt; Linked Devices &gt; Link a Device). Done in 10 seconds.
             </p>
           </div>
 
@@ -276,12 +303,12 @@
             <div class="step-number">3</div>
             <div class="step-icon-wrap">
               <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#0284C7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <polyline points="20 6 9 17 4 12"></polyline>
+                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
               </svg>
             </div>
-            <h3 class="step-heading">Get Things Done</h3>
+            <h3 class="step-heading">3. Chat on WhatsApp</h3>
             <p class="step-desc">
-              Ramu drafts replies, explains documents, calculates figures, and tracks your daily reminders directly in chat.
+              Bolo Ramu, Kaam Shuru! Send text or voice notes in English, Hindi, or Bengali to delegate work, research, and tasks.
             </p>
           </div>
 

@@ -170,4 +170,34 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+
+  // Copy Terminal Quickstart Command Button
+  const cmdCopyBtn = document.getElementById("copy-hero-cmd-btn");
+  const cmdStatus = document.getElementById("hero-cmd-copy-status");
+  if (cmdCopyBtn) {
+    cmdCopyBtn.addEventListener("click", async () => {
+      const commandToCopy = "npm start";
+      try {
+        await navigator.clipboard.writeText(commandToCopy);
+      } catch {
+        const temp = document.createElement("input");
+        temp.value = commandToCopy;
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand("copy");
+        document.body.removeChild(temp);
+      }
+
+      if (cmdStatus) cmdStatus.textContent = "Copied!";
+      if (toast) {
+        toast.textContent = "Command 'npm start' copied to clipboard!";
+        toast.classList.add("show");
+        setTimeout(() => {
+          toast.classList.remove("show");
+          if (cmdStatus) cmdStatus.textContent = "Copy";
+          toast.textContent = "Link copied to clipboard!";
+        }, 2500);
+      }
+    });
+  }
 });
